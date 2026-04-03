@@ -250,7 +250,7 @@ export const grade12Data = [
     chapter: "Chủ đề 2: Carbohydrate",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/D-Fructose.svg/640px-D-Fructose.svg.png",
+      "/fructose.png",
   },
   {
     id: "α-fructose",
