@@ -231,7 +231,7 @@ export const grade12Data = [
     chapter: "Chủ đề 2: Carbohydrate",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Alpha-D-Glucopyranose.svg/640px-Alpha-D-Glucopyranose.svg.png",
+      "Alpha-D-Glucopyranose.svg (1)",
   },
   {
     id: "β-glucose",
