@@ -253,7 +253,7 @@ export const grade12Data = [
       "/fructose.png",
   },
   {
-    id: "α-fructose",
+    id: "alpha-fructose",
     formula: "C6H12O6",
     nameIUPAC: "α-fructose",
     type: "Monosaccharide",
@@ -261,10 +261,10 @@ export const grade12Data = [
     chapter: "Chủ đề 2: Carbohydrate",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Alpha-D-Fructofuranose.svg/640px-Alpha-D-Fructofuranose.svg.png",
+      "/alpha-fructose.png",
   },
   {
-    id: "β-fructose",
+    id: "beta-fructose",
     formula: "C6H12O6",
     nameIUPAC: "β-fructose",
     type: "Monosaccharide",
@@ -272,7 +272,7 @@ export const grade12Data = [
     chapter: "Chủ đề 2: Carbohydrate",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Beta-D-Fructofuranose.svg/640px-Beta-D-Fructofuranose.svg.png",
+      "/beta-fructose.png",
   },
   {
     id: "saccharose",
@@ -283,7 +283,7 @@ export const grade12Data = [
     chapter: "Chủ đề 2: Carbohydrate",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Sucrose_str.png/640px-Sucrose_str.png",
+      "/saccharose.png",
   },
   {
     id: "maltose",
