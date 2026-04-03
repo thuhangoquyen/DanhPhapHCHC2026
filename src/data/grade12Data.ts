@@ -229,7 +229,7 @@ export const grade12Data = [
     commonName: "",
     chapter: "Chủ đề 2: Carbohydrate",
     cid: 7865,
-    image2D: "/alpha-glucose.png",
+    image2D: "/alpha-glucose.png.png",
   },
   {
     id: "beta-glucose",
@@ -316,7 +316,7 @@ export const grade12Data = [
     chapter: "Chủ đề 2: Carbohydrate",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Amylopektin_Haworth.svg/640px-Amylopektin_Haworth.svg.png",
+      "/amylopectin.png",
   },
   {
     id: "cellulose",
