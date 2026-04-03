@@ -39,28 +39,45 @@ function MolecularFlashcard({
 
   const formatFormula = (formula: string) => {
     if (!formula) return "";
-    return formula.split("").map((char, index) => {
-      if (!isNaN(Number(char)) && char !== " ") {
-        return (
-          <sub key={index} style={{ fontSize: "0.65em", bottom: "-0.15em" }}>
-            {char}
-          </sub>
-        );
-      }
-      return char;
-    });
+    return (
+      <span style={{ fontFamily: "Arial, sans-serif" }}>
+        {formula.split("").map((char, index) => {
+          const isNumber = !isNaN(Number(char)) && char !== " ";
+          const isPolymerN =
+            char === "n" &&
+            index > 0 &&
+            (formula[index - 1] === ")" || formula[index - 1] === "]");
+
+          if (isNumber || isPolymerN) {
+            return (
+              <sub
+                key={index}
+                style={{
+                  fontSize: "0.65em",
+                  verticalAlign: "sub",
+                  position: "relative",
+                  bottom: "-0.1em",
+                }}
+              >
+                {char}
+              </sub>
+            );
+          }
+          return <span key={index}>{char}</span>;
+        })}
+      </span>
+    );
   };
 
-  // NỘI DUNG CÔNG THỨC (CHỐNG TRÀN VÀ ÉP NẰM TRÊN 1 DÒNG)
+  // NỘI DUNG CÔNG THỨC
   const FormulaContent = (color: string) => {
     const formulaLen = compound.formula ? compound.formula.length : 0;
 
-    // Thuật toán co giãn font chữ cực mịn để ép công thức vừa trọn 1 dòng
-    let fSize = "28px"; // Mặc định siêu to rõ
-    if (formulaLen > 24) fSize = "13px"; // Cực dài -> Cực nhỏ
-    else if (formulaLen > 18) fSize = "16px"; // Rất dài
-    else if (formulaLen > 14) fSize = "20px"; // Hơi dài
-    else if (formulaLen > 10) fSize = "24px"; // Trung bình
+    let fSize = "28px";
+    if (formulaLen > 24) fSize = "13px";
+    else if (formulaLen > 18) fSize = "16px";
+    else if (formulaLen > 14) fSize = "20px";
+    else if (formulaLen > 10) fSize = "24px";
 
     return (
       <div
@@ -81,10 +98,10 @@ function MolecularFlashcard({
             src={compound.image2D}
             alt="Cấu tạo 2D"
             onError={() => setImgError(true)}
-            // Cập nhật kích thước ảnh to hơn cho thẻ mới
             style={{
               maxWidth: "95%",
-              maxHeight: "90px",
+              // ĐÃ CẬP NHẬT: Cho phép ảnh cao tối đa 120px (trước đây là 90px)
+              maxHeight: "120px",
               objectFit: "contain",
               filter: color === "#fff" ? "brightness(0) invert(1)" : "none",
             }}
@@ -96,7 +113,7 @@ function MolecularFlashcard({
               fontWeight: "800",
               color: color,
               letterSpacing: "1px",
-              whiteSpace: "nowrap", // QUAN TRỌNG: Cấm tuyệt đối việc xuống dòng
+              whiteSpace: "nowrap",
               maxWidth: "100%",
               overflow: "hidden",
               textOverflow: "ellipsis",
@@ -109,7 +126,7 @@ function MolecularFlashcard({
     );
   };
 
-  // TÊN CÓ THỂ XUỐNG DÒNG VÌ CÓ NHIỀU TÊN RẤT DÀI
+  // TÊN GỌI
   const NameContent = (color: string) => (
     <div
       style={{
@@ -184,11 +201,11 @@ function MolecularFlashcard({
   return (
     <div
       onClick={handleCardClick}
-      // NỚI RỘNG KÍCH THƯỚC THẺ: Tăng lên 320px x 200px
       style={{
         width: "100%",
         maxWidth: "320px",
-        height: "200px",
+        // ĐÃ CẬP NHẬT: Tăng chiều cao tổng thể của thẻ lên 240px (trước đây là 200px)
+        height: "240px",
         perspective: "1000px",
         cursor: isAnimating ? "wait" : "pointer",
         margin: "0 auto",
