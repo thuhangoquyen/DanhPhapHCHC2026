@@ -219,8 +219,7 @@ export const grade12Data = [
     commonName: "Đường nho",
     chapter: "Chủ đề 2: Carbohydrate",
     cid: 7865,
-    image2D:
-      "/glucose.png",
+    image2D: "/glucose.png",
   },
   {
     id: "alpha-glucose",
@@ -240,8 +239,7 @@ export const grade12Data = [
     commonName: "",
     chapter: "Chủ đề 2: Carbohydrate",
     cid: 7865,
-    image2D:
-      "/beta-glucose.png",
+    image2D: "/beta-glucose.png",
   },
   {
     id: "fructose",
