@@ -233,7 +233,7 @@ export const grade12Data = [
     image2D: "/alpha-glucose.png",
   },
   {
-    id: "β-glucose",
+    id: "beta-glucose",
     formula: "C6H12O6",
     nameIUPAC: "β-glucose",
     type: "Monosaccharide",
@@ -241,7 +241,7 @@ export const grade12Data = [
     chapter: "Chủ đề 2: Carbohydrate",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Beta-D-Glucopyranose.svg/640px-Beta-D-Glucopyranose.svg.png",
+      "beta-glucose.png",
   },
   {
     id: "fructose",
