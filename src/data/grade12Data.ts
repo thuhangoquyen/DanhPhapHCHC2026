@@ -223,15 +223,14 @@ export const grade12Data = [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/D-glucose.svg/640px-D-glucose.svg.png",
   },
   {
-    id: "α-glucose",
+    id: "alpha-glucose",
     formula: "C6H12O6",
     nameIUPAC: "α-glucose",
     type: "Monosaccharide",
     commonName: "",
     chapter: "Chủ đề 2: Carbohydrate",
     cid: 7865,
-    image2D:
-      "/Alpha-D-Glucopyranose.svg (1).png",
+    image2D: "/alpha-glucose.png",
   },
   {
     id: "β-glucose",
