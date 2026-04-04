@@ -536,7 +536,7 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "/polystyrene",
+      "/polystyrene.png",
   },
   {
     id: "poly(vinyl-chloride)",
