@@ -86,7 +86,7 @@ export const grade11Data = [
     chapter: "Chủ đề 1: Hydrocarbon",
     cid: 6324,
     image2D:
-      "/2,2-dimethylpropane.png",
+      "/2,2-dimethylpropane.PNG",
   },
   {
     id: "hexane",
@@ -381,17 +381,17 @@ export const grade11Data = [
   {
     id: "pent-1-yne",
     formula: "CH≡C[CH2]2CH3",
-    nameIUPAC: "",
+    nameIUPAC: "Pent-1-yne",
     type: "Alkyne",
     commonName: "",
     chapter: "Chủ đề 1: Hydrocarbon",
     cid: 12309,
-    image2D: "https://pubchem.ncbi.nlm.nih.gov/image/imgsrv.fcgi?cid=12309&t=l",
+    image2D: "",
   },
   {
     id: "pent-2-yne",
     formula: "CH3-C≡C-CH2-CH3",
-    nameIUPAC: "",
+    nameIUPAC: "Pent-2-yne",
     type: "Alkyne",
     commonName: "",
     chapter: "Chủ đề 1: Hydrocarbon",
@@ -401,7 +401,7 @@ export const grade11Data = [
   {
     id: "3-methylbut-1-yne",
     formula: "CH≡CCH(CH3)CH3",
-    nameIUPAC: "",
+    nameIUPAC: "3-methylbut-1-yne",
     type: "Alkyne",
     commonName: "",
     chapter: "Chủ đề 1: Hydrocarbon",
@@ -726,7 +726,7 @@ export const grade11Data = [
     commonName: "",
     chapter: "Chủ đề 2: Dẫn xuất Halogen - Alcohol - Phenol",
     cid: 12956,
-    image2D: "/1-chloro-2,2-dimethylpropane.png",
+    image2D: "/1-chloro-2,2-dimethylpropane.ipg",
   },
   {
     id: "chloroethene",
@@ -1150,7 +1150,7 @@ export const grade11Data = [
     chapter: "Chủ đề 3: Hợp chất carbonyl - Carboxylic acid",
     cid: 177,
     image2D:
-      "/2-methylbutanal.png",
+      "/2-methylbutanal.JPG",
   },
   {
     id: "3-methylbutanal",
