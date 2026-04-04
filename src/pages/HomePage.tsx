@@ -393,16 +393,38 @@ function HomePage() {
         paddingBottom: "40px",
       }}
     >
-      <h2
+      {/* KHUNG TIÊU ĐỀ & LOGO ĐÃ ĐƯỢC CHỈNH SỬA Ở ĐÂY */}
+      <div
         style={{
-          color: "#2c3e50",
-          textAlign: "center",
-          fontSize: "20px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "12px", 
           marginBottom: "15px",
         }}
       >
-        DANH PHÁP HỢP CHẤT HỮU CƠ
-      </h2>
+        <img 
+          src="/logo-co-ha.png" 
+          alt="Logo Cô Hà" 
+          style={{ 
+            width: "45px",
+            height: "45px", 
+            objectFit: "contain",
+            borderRadius: "50%", 
+            boxShadow: "0 2px 5px rgba(0,0,0,0.1)" 
+          }} 
+        />
+        <h2
+          style={{
+            color: "#2c3e50",
+            fontSize: "20px",
+            margin: 0, 
+          }}
+        >
+          DANH PHÁP HỢP CHẤT HỮU CƠ
+        </h2>
+      </div>
+
       {renderTabs()}
 
       {/* -------------------- TAB HỌC TẬP -------------------- */}
@@ -1792,140 +1814,3 @@ function HomePage() {
                   style={{
                     margin: "5px 0",
                     fontSize: "13px",
-                    color: "#34495e",
-                  }}
-                >
-                  <span style={{ color: "#2980b9", fontWeight: "bold" }}>
-                    Tên gốc R'
-                  </span>{" "}
-                  +{" "}
-                  <span style={{ color: "#27ae60", fontWeight: "bold" }}>
-                    Tên gốc acid RCOO
-                  </span>{" "}
-                  (đổi đuôi ic thành{" "}
-                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
-                    ate
-                  </span>
-                  )<br />
-                  <i style={{ color: "#7f8c8d" }}>
-                    Ví dụ: <span style={{ color: "#2980b9" }}>Methyl</span>{" "}
-                    <span style={{ color: "#27ae60" }}>methano</span>
-                    <span style={{ color: "#e74c3c" }}>ate</span> (HCOOCH
-                    <sub>3</sub>)
-                  </i>
-                </p>
-              </div>
-              <div
-                style={{ borderLeft: "4px solid #8e44ad", paddingLeft: "10px" }}
-              >
-                <strong style={{ color: "#8e44ad", fontSize: "15px" }}>
-                  2. AMINE
-                </strong>
-                <p
-                  style={{
-                    margin: "5px 0",
-                    fontSize: "13px",
-                    color: "#34495e",
-                  }}
-                >
-                  Tên gốc chức: Tên gốc hydrocarbon +{" "}
-                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
-                    amine
-                  </span>{" "}
-                  <br />
-                  <br />• <b>Amine bậc một:</b> Tên hydrocarbon (bỏ kí tự "e" ở
-                  cuối) - vị trí nhóm -NH<sub>2</sub> -{" "}
-                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
-                    amine
-                  </span>{" "}
-                  <br />
-                  <br />• <b>Amine bậc hai:</b> N-tên gốc hydrocarbon + tên
-                  hydrocarbon mạch dài nhất (bỏ kí tự "e" ở cuối) - vị trí nhóm
-                  amine -{" "}
-                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
-                    amine
-                  </span>{" "}
-                  <br />
-                  <br />• <b>Amine bậc ba:</b> N-tên gốc hydrocarbon thứ nhất -
-                  N-tên gốc hydrocarbon thứ hai + tên hydrocarbon mạch dài nhất
-                  (bỏ kí tự "e" ở cuối) - vị trí nhóm amine -{" "}
-                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
-                    amine
-                  </span>
-                </p>
-              </div>
-              <div
-                style={{ borderLeft: "4px solid #8e44ad", paddingLeft: "10px" }}
-              >
-                <strong style={{ color: "#8e44ad", fontSize: "15px" }}>
-                  3. AMINO ACID
-                </strong>
-                <p
-                  style={{
-                    margin: "5px 0",
-                    fontSize: "13px",
-                    color: "#34495e",
-                  }}
-                >
-                  <span style={{ color: "#2980b9", fontWeight: "bold" }}>
-                    Vị trí của nhóm amino - amino
-                  </span>{" "}
-                  +{" "}
-                  <span style={{ color: "#27ae60", fontWeight: "bold" }}>
-                    Tên của carboxylic acid tương ứng
-                  </span>
-                  <br />
-                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
-                    Lưu ý: Vị trí của nhóm amino (2, 3, 4,...) là vị trí của
-                    nguyên tử C trong mạch C của carboxylic acid liên kết trực
-                    tiếp với nhóm này, tính từ nguyên tử C của nhóm carbonyl.
-                  </i>
-                  <br /> Tên bán hệ thống: thay vị trí của các nhóm amino (2 ,3,
-                  4,...) bằng các chữ cái Hy Lạp và dùng tên thông thường của
-                  carboxylic acid.
-                </p>
-              </div>
-              <div
-                style={{ borderLeft: "4px solid #8e44ad", paddingLeft: "10px" }}
-              >
-                <strong style={{ color: "#8e44ad", fontSize: "15px" }}>
-                  4. POLYMER
-                </strong>
-                <p
-                  style={{
-                    margin: "5px 0",
-                    fontSize: "13px",
-                    color: "#34495e",
-                  }}
-                >
-                  <span style={{ color: "#2980b9", fontWeight: "bold" }}>
-                    poly
-                  </span>{" "}
-                  +{" "}
-                  <span style={{ color: "#27ae60", fontWeight: "bold" }}>
-                    tên của monomer
-                  </span>
-                  <br />
-                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
-                    Lưu ý: Nếu tên của monomer gồm hai tử trở lên hoặc polymer
-                    được hình thành từ hai loại monomer trở lên thì tên của
-                    monomer được đặt trong dấu ngoặc đơn.
-                    <br /> (ví dụ: poly(vinyl chloride))
-                  </i>
-                </p>
-              </div>
-            </div>
-            <style>{`
-              @keyframes pulse {
-                0% { transform: scale(1); }
-                100% { transform: scale(1.05); }
-              }
-            `}</style>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-export default HomePage;
