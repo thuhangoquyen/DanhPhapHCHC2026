@@ -1451,4 +1451,503 @@ function HomePage() {
                         borderRadius: "20px",
                       }}
                     >
-                      🔍 Xem chi tiết 3D
+                      🔍 Xem chi tiết 3D ➔
+                    </Link>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <div
+                style={{
+                  textAlign: "center",
+                  color: "#e74c3c",
+                  marginTop: "20px",
+                }}
+              >
+                <p style={{ fontSize: "40px", margin: "0 0 10px 0" }}>🥺</p>
+                <p>Không tìm thấy chất nào.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* -------------------- TAB HƯỚNG DẪN -------------------- */}
+      {activeTab === "guide" && (
+        <div style={{ animation: "fadeIn 0.3s", paddingBottom: "20px" }}>
+          <div style={{ textAlign: "center", marginBottom: "25px" }}>
+            <h3
+              style={{
+                color: "#2c3e50",
+                margin: "0 0 5px 0",
+                fontSize: "22px",
+              }}
+            >
+              📖 SỔ TAY DANH PHÁP
+            </h3>
+            <p style={{ color: "#7f8c8d", fontSize: "13px", margin: 0 }}>
+              Chuẩn IUPAC
+            </p>
+          </div>
+          <div
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: "15px",
+              padding: "20px",
+              marginBottom: "20px",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "#3498db",
+                color: "#fff",
+                display: "inline-block",
+                padding: "5px 15px",
+                borderRadius: "20px",
+                fontSize: "12px",
+                fontWeight: "bold",
+                marginBottom: "15px",
+                textTransform: "uppercase",
+              }}
+            >
+              I. Nguyên tắc chung
+            </div>
+            <p
+              style={{
+                fontSize: "14px",
+                color: "#2c3e50",
+                lineHeight: "1.6",
+                marginBottom: "15px",
+              }}
+            >
+              Danh pháp thay thế (IUPAC) của hợp chất hữu cơ thường gồm 3 phần:
+            </p>
+            <div
+              style={{
+                display: "flex",
+                gap: "5px",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <div
+                style={{
+                  backgroundColor: "#e8f4f8",
+                  border: "1px solid #3498db",
+                  color: "#2980b9",
+                  padding: "10px",
+                  borderRadius: "10px",
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  flex: 1,
+                  textAlign: "center",
+                }}
+              >
+                Vị trí + Tên nhánh <br />{" "}
+                <span style={{ fontSize: "10px", fontWeight: "normal" }}></span>
+              </div>
+              <span style={{ fontSize: "20px", color: "#bdc3c7" }}>+</span>
+              <div
+                style={{
+                  backgroundColor: "#eefaf1",
+                  border: "1px solid #2ecc71",
+                  color: "#27ae60",
+                  padding: "10px",
+                  borderRadius: "10px",
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  flex: 1,
+                  textAlign: "center",
+                }}
+              >
+                Tiền tố <br />{" "}
+                <span style={{ fontSize: "10px", fontWeight: "normal" }}>
+                  (Số nguyên tử carbon mạch chính: Meth, Eth, Prop...)
+                </span>
+              </div>
+              <span style={{ fontSize: "20px", color: "#bdc3c7" }}>+</span>
+              <div
+                style={{
+                  backgroundColor: "#fdedec",
+                  border: "1px solid #e74c3c",
+                  color: "#c0392b",
+                  padding: "10px",
+                  borderRadius: "10px",
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  flex: 1,
+                  textAlign: "center",
+                }}
+              >
+                Hậu tố <br />{" "}
+                <span style={{ fontSize: "10px", fontWeight: "normal" }}>
+                  (ane, ene, ol, al...)
+                </span>
+              </div>
+            </div>
+          </div>
+          <p
+            style={{
+              fontSize: "14px",
+              color: "#2c3e50",
+              lineHeight: "1.6",
+              marginBottom: "15px",
+            }}
+          >
+            Quy tắc về số và chữ: Giữa số và số dùng dấu phẩy (,), giữa số và
+            chữ dùng dấu gạch nối (-).
+          </p>
+          <span style={{ fontSize: "10px", fontWeight: "normal" }}></span>
+          <div
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: "15px",
+              padding: "20px",
+              marginBottom: "20px",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "#e67e22",
+                color: "#fff",
+                display: "inline-block",
+                padding: "5px 15px",
+                borderRadius: "20px",
+                fontSize: "12px",
+                fontWeight: "bold",
+                marginBottom: "15px",
+                textTransform: "uppercase",
+              }}
+            >
+              II. Hoá Học 11
+            </div>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+            >
+              <div
+                style={{ borderLeft: "4px solid #f39c12", paddingLeft: "10px" }}
+              >
+                <strong style={{ color: "#d35400", fontSize: "15px" }}>
+                  1. HIDROCARBON
+                </strong>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontSize: "13px",
+                    color: "#34495e",
+                  }}
+                >
+                  • <b>Alkane:</b> Vị trí nhánh - Tên nhánh + Tên tiền tố (mạch
+                  chính) +{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    ane
+                  </span>
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Mạch chính là mạch C dài nhất và có nhiều nhánh nhất.
+                    Đánh số thứ tự các nguyên tử C trên mạch chính từ đầu gần
+                    nhánh nhất. Tên nhánh gọi theo thứ tự vần chữ cái. Nếu có
+                    nhiều nhánh cùng tên thì sau tất cả các số chỉ vị trí của
+                    chúng, trước tên nhánh thêm (di, tri, tetra…) để chỉ số
+                    lượng nhánh cùng tên.
+                  </i>
+                  <br />
+                  <br />• <b>Alkene và Alkyne:</b> Vị trí nhánh - Tên nhánh +
+                  Tên tiền tố (mạch chính) - vị trí liên kết bội -{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    Tên hậu tố (ene/yne)
+                  </span>
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Chọn mạch chính chứa liên kết bội, đánh số ưu tiên
+                    đầu gần liên kết bội.
+                  </i>
+                  <br />
+                  <br />• <b>Arene:</b> Tên nhóm alkyl +{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    benzene
+                  </span>
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Khi có hai nhóm thế trên vòng benzene, vị trí của
+                    chúng có thể được chỉ ra bằng các chữ số 1,2; 1,3 hay 1,4
+                    hoặc bằng các chữ tương ứng là ortho (o), meta (m) hay para
+                    (p)
+                  </i>
+                </p>
+              </div>
+              <div
+                style={{ borderLeft: "4px solid #f39c12", paddingLeft: "10px" }}
+              >
+                <strong style={{ color: "#d35400", fontSize: "15px" }}>
+                  2. DẪN XUẤT HALOGEN - ALCOHOL - PHENOL
+                </strong>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontSize: "13px",
+                    color: "#34495e",
+                  }}
+                >
+                  • <b>Dẫn xuất halogen: </b> Vị trí nhóm thể - Tên nhóm thể
+                  halogen{""}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    o{" "}
+                  </span>{" "}
+                  + Tên hydrocarbon
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: nhóm thế halogeno (fluoro, chloro, bromo, iodo).
+                  </i>
+                  <br /> Tên gốc - chức: Tên gốc hydrocarbon halide
+                  <br /> (Ví dụ: ethyl chloride).
+                  <br />
+                  <br />• <b>Alcohol đơn chức:</b> Tên hydrocarbon (bỏ kí tự "e"
+                  ở cuối) - Vị trí nhóm -OH -{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    ol
+                  </span>
+                  <br />• <b>Alcohol đa chức:</b> Tên hydrocarbon - Vị trí nhóm
+                  -OH - Từ chỉ số lượng nhóm -OH (di, tri,...) +{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    ol
+                  </span>
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Mạch chính là mạch carbon có nhóm -OH và dài nhất.
+                    Đánh số thứ tự: từ đầu gần nhóm -OH nhất.
+                  </i>
+                  <br />
+                  <br />• <b>Phenol:</b> Đọc tên theo vị trí các nhóm thế trên
+                  vòng benzene đính với nhóm -OH.
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: ưu tiên đánh số 1 từ C có nhóm -OH, rồi theo chiều
+                    sao cho các nhánh khác có số nhỏ nhất.
+                  </i>
+                </p>
+              </div>
+              <div
+                style={{ borderLeft: "4px solid #f39c12", paddingLeft: "10px" }}
+              >
+                <strong style={{ color: "#d35400", fontSize: "15px" }}>
+                  3. ALDEHYDE & CARBOXYLIC ACID
+                </strong>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontSize: "13px",
+                    color: "#34495e",
+                  }}
+                >
+                  • <b>Aldehyde:</b> Tên hydrocarbon (bỏ kí tự "e" ở cuối) +{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    al
+                  </span>{" "}
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Đánh số các nguyên tử C ở mạch chính bắt đầu ở nguyên
+                    tử C của nhóm -CHO.
+                  </i>
+                  <br /> Tên thông thường: thay "...ic acid" bằng "...ic
+                  aldehyde" hoặc "...aldehyde"
+                  <br />• <b>Ketone:</b> Tên hydrocarbon (bỏ kí tự "e" ở cuối) -
+                  Vị trí nhóm carbonyl -{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    one
+                  </span>{" "}
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Đánh số các nguyên tử C ở mạch chính bắt đầu từ
+                    nguyên tử C gần nhóm C=O nhất.
+                  </i>
+                  <br />
+                  <br />• <b>Acid:</b> Vị trí nhánh - Tên nhánh + Tên
+                  hydrocarbon (bỏ kí tự "e" ở cuối) +{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    oic
+                  </span>{" "}
+                  acid
+                  <br />
+                  (Ví dụ: Ethan
+                  <span style={{ color: "#e74c3c" }}>oic</span> acid)
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: "15px",
+              padding: "20px",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "#9b59b6",
+                color: "#fff",
+                display: "inline-block",
+                padding: "5px 15px",
+                borderRadius: "20px",
+                fontSize: "12px",
+                fontWeight: "bold",
+                marginBottom: "15px",
+                textTransform: "uppercase",
+              }}
+            >
+              III. Hoá Học 12
+            </div>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+            >
+              <div
+                style={{ borderLeft: "4px solid #8e44ad", paddingLeft: "10px" }}
+              >
+                <strong style={{ color: "#8e44ad", fontSize: "15px" }}>
+                  1. ESTER (R-COO-R')
+                </strong>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontSize: "13px",
+                    color: "#34495e",
+                  }}
+                >
+                  <span style={{ color: "#2980b9", fontWeight: "bold" }}>
+                    Tên gốc R'
+                  </span>{" "}
+                  +{" "}
+                  <span style={{ color: "#27ae60", fontWeight: "bold" }}>
+                    Tên gốc acid RCOO
+                  </span>{" "}
+                  (đổi đuôi ic thành{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    ate
+                  </span>
+                  )<br />
+                  <i style={{ color: "#7f8c8d" }}>
+                    Ví dụ: <span style={{ color: "#2980b9" }}>Methyl</span>{" "}
+                    <span style={{ color: "#27ae60" }}>methano</span>
+                    <span style={{ color: "#e74c3c" }}>ate</span> (HCOOCH
+                    <sub>3</sub>)
+                  </i>
+                </p>
+              </div>
+              <div
+                style={{ borderLeft: "4px solid #8e44ad", paddingLeft: "10px" }}
+              >
+                <strong style={{ color: "#8e44ad", fontSize: "15px" }}>
+                  2. AMINE
+                </strong>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontSize: "13px",
+                    color: "#34495e",
+                  }}
+                >
+                  Tên gốc chức: Tên gốc hydrocarbon +{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    amine
+                  </span>{" "}
+                  <br />
+                  <br />• <b>Amine bậc một:</b> Tên hydrocarbon (bỏ kí tự "e" ở
+                  cuối) - vị trí nhóm -NH<sub>2</sub> -{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    amine
+                  </span>{" "}
+                  <br />
+                  <br />• <b>Amine bậc hai:</b> N-tên gốc hydrocarbon + tên
+                  hydrocarbon mạch dài nhất (bỏ kí tự "e" ở cuối) - vị trí nhóm
+                  amine -{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    amine
+                  </span>{" "}
+                  <br />
+                  <br />• <b>Amine bậc ba:</b> N-tên gốc hydrocarbon thứ nhất -
+                  N-tên gốc hydrocarbon thứ hai + tên hydrocarbon mạch dài nhất
+                  (bỏ kí tự "e" ở cuối) - vị trí nhóm amine -{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    amine
+                  </span>
+                </p>
+              </div>
+              <div
+                style={{ borderLeft: "4px solid #8e44ad", paddingLeft: "10px" }}
+              >
+                <strong style={{ color: "#8e44ad", fontSize: "15px" }}>
+                  3. AMINO ACID
+                </strong>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontSize: "13px",
+                    color: "#34495e",
+                  }}
+                >
+                  <span style={{ color: "#2980b9", fontWeight: "bold" }}>
+                    Vị trí của nhóm amino - amino
+                  </span>{" "}
+                  +{" "}
+                  <span style={{ color: "#27ae60", fontWeight: "bold" }}>
+                    Tên của carboxylic acid tương ứng
+                  </span>
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Vị trí của nhóm amino (2, 3, 4,...) là vị trí của
+                    nguyên tử C trong mạch C của carboxylic acid liên kết trực
+                    tiếp với nhóm này, tính từ nguyên tử C của nhóm carbonyl.
+                  </i>
+                  <br /> Tên bán hệ thống: thay vị trí của các nhóm amino (2 ,3,
+                  4,...) bằng các chữ cái Hy Lạp và dùng tên thông thường của
+                  carboxylic acid.
+                </p>
+              </div>
+              <div
+                style={{ borderLeft: "4px solid #8e44ad", paddingLeft: "10px" }}
+              >
+                <strong style={{ color: "#8e44ad", fontSize: "15px" }}>
+                  4. POLYMER
+                </strong>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontSize: "13px",
+                    color: "#34495e",
+                  }}
+                >
+                  <span style={{ color: "#2980b9", fontWeight: "bold" }}>
+                    poly
+                  </span>{" "}
+                  +{" "}
+                  <span style={{ color: "#27ae60", fontWeight: "bold" }}>
+                    tên của monomer
+                  </span>
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Nếu tên của monomer gồm hai tử trở lên hoặc polymer
+                    được hình thành từ hai loại monomer trở lên thì tên của
+                    monomer được đặt trong dấu ngoặc đơn.
+                    <br /> (ví dụ: poly(vinyl chloride))
+                  </i>
+                </p>
+              </div>
+            </div>
+            <style>{`
+              @keyframes pulse {
+                0% { transform: scale(1); }
+                100% { transform: scale(1.05); }
+              }
+            `}</style>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default HomePage;
