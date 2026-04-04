@@ -294,7 +294,7 @@ export const grade12Data = [
     chapter: "Chủ đề 2: Carbohydrate",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Maltose_Haworth.svg/640px-Maltose_Haworth.svg.png",
+      "/maltose.png",
   },
   {
     id: "amylose",
@@ -305,7 +305,7 @@ export const grade12Data = [
     chapter: "Chủ đề 2: Carbohydrate",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Amylose3.svg/640px-Amylose3.svg.png", // Đã xóa link sai
+      "/amylose.png", 
   },
   {
     id: "amylopectin",
@@ -327,7 +327,7 @@ export const grade12Data = [
     chapter: "Chủ đề 2: Carbohydrate",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Cellulose_Haworth.svg/640px-Cellulose_Haworth.svg.png", // Đã xóa link sai
+      "/cellulose.png", 
   },
   // --- CHƯƠNG 3: AMINE - AMINO ACID - PEPTIDE ---
   {
