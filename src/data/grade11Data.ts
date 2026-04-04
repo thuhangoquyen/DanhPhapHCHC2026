@@ -86,7 +86,7 @@ export const grade11Data = [
     chapter: "Chủ đề 1: Hydrocarbon",
     cid: 6324,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/2%2C2-dimethylpropane.PNG/640px-2%2C2-dimethylpropane.PNG",
+      "/2,2-dimethylpropane.png",
   },
   {
     id: "hexane",
@@ -174,7 +174,7 @@ export const grade11Data = [
     chapter: "Chủ đề 1: Hydrocarbon",
     cid: 6324,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/2%2C2-dimetilbut%C4%81ns.svg/640px-2%2C2-dimetilbut%C4%81ns.svg.png",
+      "/2,2-dimethylbutane.png",
   },
   {
     id: "2,3-dimethylbutane",
@@ -261,7 +261,7 @@ export const grade11Data = [
     chapter: "Chủ đề 1: Hydrocarbon",
     cid: 6325,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Isobuten.svg/640px-Isobuten.svg.png",
+      "/2-methylpropene.png",
   },
   {
     id: "pent-1-ene",
@@ -314,7 +314,7 @@ export const grade11Data = [
     commonName: "",
     chapter: "Chủ đề 1: Hydrocarbon",
     cid: 6325,
-    image2D: "https://pubchem.ncbi.nlm.nih.gov/image/imgsrv.fcgi?cid=11240&t=l",
+    image2D: "/2-methylbut-1-ene.png",
   },
   {
     id: "2-methylbut-2-ene",
@@ -335,7 +335,7 @@ export const grade11Data = [
     commonName: "",
     chapter: "Chủ đề 1: Hydrocarbon",
     cid: 11239,
-    image2D: "https://pubchem.ncbi.nlm.nih.gov/image/imgsrv.fcgi?cid=11239&t=l",
+    image2D: "/3-methylbut-1-ene.png",
   },
   {
     id: "ethyne",
@@ -418,7 +418,7 @@ export const grade11Data = [
     chapter: "Chủ đề 1: Hydrocarbon",
     cid: 241,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Benzene_Structure.svg/640px-Benzene_Structure.svg.png",
+      "/benzene.png",
   },
   {
     id: "methylbenzene",
@@ -429,7 +429,7 @@ export const grade11Data = [
     chapter: "Chủ đề 1: Hydrocarbon",
     cid: 1140,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Toluene_structure.svg/640px-Toluene_structure.svg.png",
+      "/toluene.png",
   },
   {
     id: "ethylbenzene",
@@ -484,7 +484,7 @@ export const grade11Data = [
     chapter: "Chủ đề 1: Hydrocarbon",
     cid: 7501,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Styrene_structure.svg/640px-Styrene_structure.svg.png",
+      "/styrene.png",
   },
   {
     id: "naphthalene",
@@ -495,7 +495,7 @@ export const grade11Data = [
     chapter: "Chủ đề 1: Hydrocarbon",
     cid: 931,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Naphthalene_structure.svg/640px-Naphthalene_structure.svg.png",
+      "/naphthalene.png",
   },
   // ==========================================
   // CHỦ ĐỀ 2: DẪN XUẤT HALOGEN - ALCOHOL - PHENOL
@@ -620,7 +620,7 @@ export const grade11Data = [
     commonName: "Sec-butyl chloride",
     chapter: "Chủ đề 2: Dẫn xuất Halogen - Alcohol - Phenol",
     cid: 6327,
-    image2D: "",
+    image2D: "/2-chlorobutane.png",
   },
   {
     id: "1-chloro-2-methylpropane",
@@ -662,7 +662,7 @@ export const grade11Data = [
     commonName: "",
     chapter: "Chủ đề 2: Dẫn xuất Halogen - Alcohol - Phenol",
     cid: 6327,
-    image2D: "",
+    image2D: "/2-chloropentane.png",
   },
   {
     id: "3-chloropentane",
@@ -672,7 +672,7 @@ export const grade11Data = [
     commonName: "",
     chapter: "Chủ đề 2: Dẫn xuất Halogen - Alcohol - Phenol",
     cid: 6327,
-    image2D: "",
+    image2D: "/3-chloropentane.png",
   },
   {
     id: "1-chloro-2-methylbutane",
@@ -683,7 +683,7 @@ export const grade11Data = [
     chapter: "Chủ đề 2: Dẫn xuất Halogen - Alcohol - Phenol",
     cid: 6327,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/1-chloro-2-methylbutane_flat.svg/640px-1-chloro-2-methylbutane_flat.svg.png",
+      "/1-chloro-2-methylbutane.png",
   },
   {
     id: "2-chloro-2-methylbutane",
@@ -694,7 +694,7 @@ export const grade11Data = [
     chapter: "Chủ đề 2: Dẫn xuất Halogen - Alcohol - Phenol",
     cid: 6327,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/2-chloro-2-methylbutane_flat.svg/640px-2-chloro-2-methylbutane_flat.svg.png",
+      "/2-chloro-2-methylbutane.png",
   },
   {
     id: "2-chloro-3-methylbutane",
@@ -705,7 +705,7 @@ export const grade11Data = [
     chapter: "Chủ đề 2: Dẫn xuất Halogen - Alcohol - Phenol",
     cid: 6327,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/2-chloro-3-methylbutane_flat.svg/640px-2-chloro-3-methylbutane_flat.svg.png",
+      "/2-chloro-3-methylbutane.png",
   },
   {
     id: "1-chloro-3-methylbutane",
@@ -716,7 +716,7 @@ export const grade11Data = [
     chapter: "Chủ đề 2: Dẫn xuất Halogen - Alcohol - Phenol",
     cid: 6327,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/1-chloro-3-methylbutane_flat.svg/640px-1-chloro-3-methylbutane_flat.svg.png",
+      "/1-chloro-3-methylbutane.png",
   },
   {
     id: "1-chloro-2,2-dimethylpropane",
@@ -726,7 +726,7 @@ export const grade11Data = [
     commonName: "",
     chapter: "Chủ đề 2: Dẫn xuất Halogen - Alcohol - Phenol",
     cid: 12956,
-    image2D: "https://pubchem.ncbi.nlm.nih.gov/image/imgsrv.fcgi?cid=12956&t=l",
+    image2D: "/1-chloro-2,2-dimethylpropane.png",
   },
   {
     id: "chloroethene",
@@ -1150,7 +1150,7 @@ export const grade11Data = [
     chapter: "Chủ đề 3: Hợp chất carbonyl - Carboxylic acid",
     cid: 177,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/2-Methyllbutanal.svg/640px-2-Methyllbutanal.svg.png",
+      "/2-methylbutanal.png",
   },
   {
     id: "3-methylbutanal",
@@ -1349,7 +1349,7 @@ export const grade11Data = [
     chapter: "Chủ đề 3: Hợp chất carbonyl - Carboxylic acid",
     cid: 176,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/2-Methylbutyric_acid.svg/640px-2-Methylbutyric_acid.svg.png",
+      "/2-methylbutanoic_acid.png",
   },
   {
     id: "3-methylbutanoic-acid",
