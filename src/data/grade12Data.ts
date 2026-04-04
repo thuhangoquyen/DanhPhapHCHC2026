@@ -53,7 +53,7 @@ export const grade12Data = [
     chapter: "Chủ đề 1: Ester-Lipid",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Isopropyl_formate.svg/640px-Isopropyl_formate.svg.png",
+      "/isopropyl_methanoate.png",
   },
   {
     id: "ethyl-ethanoate",
@@ -73,7 +73,7 @@ export const grade12Data = [
     commonName: "Methyl propionate",
     chapter: "Chủ đề 1: Ester-Lipid",
     cid: 7865,
-    image2D: "", // Đã xóa link sai
+    image2D: "", 
   },
   {
     id: "methyl-benzoate",
@@ -137,7 +137,7 @@ export const grade12Data = [
     chapter: "Chủ đề 1: Ester-Lipid",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Isoamyl_acetate.svg/640px-Isoamyl_acetate.svg.png",
+      "/isoamyl_acetate.png",
   },
   {
     id: "methyl-methacrylate",
@@ -148,7 +148,7 @@ export const grade12Data = [
     chapter: "Chủ đề 1: Ester-Lipid",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Methyl_methacrylate_200.svg/640px-Methyl_methacrylate_200.svg.png",
+      "/methyl_methacrylate.png",
   },
   {
     id: "palmitic-acid",
@@ -344,13 +344,13 @@ export const grade12Data = [
   {
     id: "ethanamine",
     formula: "C2H5NH2",
-    nameIUPAC: "Ethanamine", // Sửa lỗi tên cũ "Methanamine"
+    nameIUPAC: "Ethanamine", 
     type: "Amine",
     commonName: "Ethylamine",
     chapter: "Chủ đề 3: Amine - Amino acid - Peptide",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/0/0f/Ethylamin_linear.png?_=20080127222638", // Đã xóa link sai
+      "https://upload.wikimedia.org/wikipedia/commons/0/0f/Ethylamin_linear.png?_=20080127222638", 
   },
   {
     id: "propan-1-amine",
@@ -392,7 +392,7 @@ export const grade12Data = [
     chapter: "Chủ đề 3: Amine - Amino acid - Peptide",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Isopropylamine.svg/640px-Isopropylamine.svg.png", // Đã xóa link sai
+      "/isopropylamine.png", 
   },
   {
     id: "N,N-dimethylmethanamine",
@@ -403,7 +403,7 @@ export const grade12Data = [
     chapter: "Chủ đề 3: Amine - Amino acid - Peptide",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Trimethylamine_V1.svg/640px-Trimethylamine_V1.svg.png", // Đã xóa link sai
+      "/trimethylamine.png", 
   },
   {
     id: "benzenamine",
@@ -436,7 +436,7 @@ export const grade12Data = [
     chapter: "Chủ đề 3: Amine - Amino acid - Peptide",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Alanine_%28Ala%29.png/640px-Alanine_%28Ala%29.png", // Đã xóa link sai
+      "/alanine.png", 
   },
   {
     id: "2-amino-3-methylbutanoic-acid",
@@ -447,7 +447,7 @@ export const grade12Data = [
     chapter: "Chủ đề 3: Amine - Amino acid - Peptide",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Valine_%28Val%29.png/640px-Valine_%28Val%29.png", // Đã xóa link sai
+      "/valine.png", 
   },
   {
     id: "2,6-diaminohexanoic-acid",
@@ -458,7 +458,7 @@ export const grade12Data = [
     chapter: "Chủ đề 3: Amine - Amino acid - Peptide",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Lysin_-_Lysine.svg/640px-Lysin_-_Lysine.svg.png",
+      "/lysine.png",
   },
   {
     id: "2-aminopentanedioic-acid",
@@ -469,7 +469,7 @@ export const grade12Data = [
     chapter: "Chủ đề 3: Amine - Amino acid - Peptide",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Glutamins%C3%A4ure_-_Glutamic_acid.svg/640px-Glutamins%C3%A4ure_-_Glutamic_acid.svg.png",
+      "/glutamic acid.png",
   },
   {
     id: "6-aminohexanoic-acid",
@@ -514,7 +514,7 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "https://www.snglrtywatch.com/wp-content/uploads/2021/08/Polyethylene-building-block-1024x979.png",
+      "/polyethylene.png",
   },
   {
     id: "polypropylene",
@@ -525,7 +525,7 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "https://www.snglrtywatch.com/wp-content/uploads/2021/08/Polyethylene-building-block-1024x979.png",
+      "/polypropylene.png",
   },
   {
     id: "polystyrene",
@@ -536,7 +536,7 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/1/13/Polystyrene_PS.png?_=20070305230610",
+      "/polystyrene",
   },
   {
     id: "poly(vinyl-chloride)",
@@ -547,7 +547,7 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Polystyrene_PS.png/640px-Polystyrene_PS.png",
+      "/poly(vinyl_chloride).png",
   },
   {
     id: "poly(methyl-methacrylate)",
@@ -558,7 +558,7 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "https://www.fratellowatches.com/cdn-cgi/image/anim=false/wp-content/uploads/2020/11/pmma-400x386.jpg",
+      "/poly(methyl_methacrylate).png",
   },
   {
     id: "poly(phenol-formaldehyde)",
@@ -569,7 +569,7 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "https://www.researchgate.net/profile/Boris-Mahltig/publication/362950358/figure/fig1/AS:11431281096700827@1668252397615/Schematic-polymer-structure-of-phenol-formaldehyde-resin-Simple-description-without.png",
+      "poly(phenol-formaldehyde).png",
   },
   {
     id: "poly(hexamethylene-adipamide)",
@@ -580,7 +580,7 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/3/33/Nylon_6%2C6.png",
+      "/nylon-6,6.png",
   },
   {
     id: "polycaproamide",
@@ -591,7 +591,7 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Polycaprolactam.svg/640px-Polycaprolactam.svg.png",
+      "/capron.png",
   },
   {
     id: "polyacrylonitrile",
@@ -602,7 +602,7 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Polyacrylonitrile-PAN.svg/640px-Polyacrylonitrile-PAN.svg.png",
+      "/nitron.png",
   },
   {
     id: "cellulose-diacetate",
@@ -612,7 +612,7 @@ export const grade12Data = [
     commonName: "",
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
-    image2D: "",
+    image2D: "/cellulose diacetate.png",
   },
   {
     id: "cellulose-triacetate",
@@ -622,7 +622,7 @@ export const grade12Data = [
     commonName: "",
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
-    image2D: "",
+    image2D: "/cellulose triacetate.png",
   },
   {
     id: "polybuta-1,3-diene",
@@ -644,7 +644,7 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "https://video.vietjack.com/upload2/quiz_source1/2020/03/4-1585000521.PNG",
+      "/caosubuna-S.png",
   },
   {
     id: "pngoly(butadiene-acrylonitrile)",
@@ -655,7 +655,7 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "https://vietjack.com/tinh-chat-hoa-hoc/images/phan-tu-khoi-cua-cao-su-buna-n-310336.PNG",
+      "/caosubuna-N.png",
   },
   {
     id: "polyisoprene",
@@ -666,7 +666,7 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Naturkautschuk.svg/640px-Naturkautschuk.svg.png",
+      "/polyisoprene.png",
   },
   {
     id: "polychloroprene",
@@ -677,7 +677,7 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/1/1c/Polychloroprene.png",
+      "/caosuchloroprene.png",
   },
   {
     id: "poly(urea-formaldehyde)",
@@ -688,6 +688,6 @@ export const grade12Data = [
     chapter: "Chủ đề 4: Polymer",
     cid: 7865,
     image2D:
-      "https://cmds-test.vedantu.com/prod/question-sets/81292cb8-c877-4bd7-b2a4-c5df2abdb9dc8633303516231354401.png",
+      "/poly(ure-formaldehyde).png",
   },
 ];
