@@ -101,7 +101,7 @@ function MolecularFlashcard({
             style={{
               maxWidth: "95%",
               // ĐÃ CẬP NHẬT: Cho phép ảnh cao tối đa 120px (trước đây là 90px)
-              maxHeight: "120px",
+              maxHeight: "150px",
               objectFit: "contain",
               filter: color === "#fff" ? "brightness(0) invert(1)" : "none",
             }}
