@@ -237,7 +237,7 @@ function MolecularFlashcard({
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            padding: "15px",
+            padding: "20px",
             boxSizing: "border-box",
           }}
         >
@@ -300,7 +300,7 @@ function MolecularFlashcard({
             flexDirection: "column",
             alignItems: "center",
             transform: "rotateY(180deg)",
-            padding: "15px",
+            padding: "20px",
             boxSizing: "border-box",
             boxShadow: "0 6px 16px rgba(59, 91, 219, 0.3)",
           }}
