@@ -203,9 +203,9 @@ function MolecularFlashcard({
       onClick={handleCardClick}
       style={{
         width: "100%",
-        maxWidth: "320px",
+        maxWidth: "350px",
         // ĐÃ CẬP NHẬT: Tăng chiều cao tổng thể của thẻ lên 240px (trước đây là 200px)
-        height: "240px",
+        height: "280px",
         perspective: "1000px",
         cursor: isAnimating ? "wait" : "pointer",
         margin: "0 auto",
