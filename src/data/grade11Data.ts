@@ -54,7 +54,7 @@ export const grade11Data = [
     chapter: "Chủ đề 1: Hydrocarbon",
     cid: 6324,
     image2D:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Isobutane_simple.svg/640px-Isobutane_simple.svg.png",
+      "/2-methylpropane.png",
   },
   {
     id: "pentane",
