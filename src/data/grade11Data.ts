@@ -726,7 +726,7 @@ export const grade11Data = [
     commonName: "",
     chapter: "Chủ đề 2: Dẫn xuất Halogen - Alcohol - Phenol",
     cid: 12956,
-    image2D: "/1-chloro-2,2-dimethylpropane.ipg",
+    image2D: "/1-chloro-2,2-dimethylpropane.jpg",
   },
   {
     id: "chloroethene",
