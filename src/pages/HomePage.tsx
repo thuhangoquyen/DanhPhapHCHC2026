@@ -440,7 +440,7 @@ function HomePage() {
             <button onClick={() => setActiveGrade("12")} style={{ flex: 1, padding: "12px", borderRadius: "10px", border: "none", backgroundColor: activeGrade === "12" ? "#e74c3c" : "#f1f2f6", color: activeGrade === "12" ? "white" : "#7f8c8d", fontWeight: "bold", cursor: "pointer" }}>Lớp 12</button>
           </div>
           <div style={{ marginBottom: "20px" }}>
-            <select value={selectedChapter} onChange={(e) => setSelectedChapter(e.target.value)} style={{ width: "100%", padding: "12px", borderRadius: "10px", border: "1px solid #3498db", backgroundColor: "#f0f7ff", color: "#2c3e50", fontWeight: "bold", fontSize: "14px", outline: "none" }}>
+            <select value={selectedChapter} onChange={(e) => setSelectedChapter(e.target.value)} style={{ width: "100%", minWidth: 0, padding: "12px", borderRadius: "10px", border: "1px solid #3498db", backgroundColor: "#f0f7ff", color: "#2c3e50", fontWeight: "bold", fontSize: "14px", outline: "none", textOverflow: "ellipsis" }}>
               {chapters.map((ch) => <option key={ch} value={ch}>{ch === "Tất cả" ? "🌟 Tất cả chủ đề" : `📂 ${ch}`}</option>)}
             </select>
           </div>
@@ -512,11 +512,11 @@ function HomePage() {
                       <div style={{ color: "#7f8c8d", fontSize: "12px", marginTop: "5px" }}>Tùy chọn chủ đề để luyện tập chuyên sâu</div>
                     </div>
                   </div>
-                  <div style={{ display: "flex", gap: "10px" }}>
-                    <select value={quizChapter11} onChange={(e) => setQuizChapter11(e.target.value)} style={{ flex: 2, padding: "10px", borderRadius: "10px", border: "1px solid #bdc3c7", outline: "none", fontSize: "13px", color: "#2c3e50", fontWeight: "bold" }}>
+                  <div style={{ display: "flex", gap: "10px", width: "100%" }}>
+                    <select value={quizChapter11} onChange={(e) => setQuizChapter11(e.target.value)} style={{ flex: 1, minWidth: 0, padding: "10px", borderRadius: "10px", border: "1px solid #bdc3c7", outline: "none", fontSize: "13px", color: "#2c3e50", fontWeight: "bold", textOverflow: "ellipsis" }}>
                       {chapters11.map((ch) => <option key={ch} value={ch}>{ch === "Tất cả" ? "🌟 Tất cả Lớp 11" : ch}</option>)}
                     </select>
-                    <button onClick={() => startQuiz("11")} style={{ flex: 1, padding: "10px", backgroundColor: "#3498db", color: "#fff", border: "none", borderRadius: "10px", fontWeight: "bold", cursor: "pointer" }}>BẮT ĐẦU</button>
+                    <button onClick={() => startQuiz("11")} style={{ flexShrink: 0, padding: "10px 15px", backgroundColor: "#3498db", color: "#fff", border: "none", borderRadius: "10px", fontWeight: "bold", cursor: "pointer", whiteSpace: "nowrap" }}>BẮT ĐẦU</button>
                   </div>
                 </div>
 
@@ -529,11 +529,11 @@ function HomePage() {
                       <div style={{ color: "#7f8c8d", fontSize: "12px", marginTop: "5px" }}>Thiết lập giới hạn kiến thức bạn muốn thử</div>
                     </div>
                   </div>
-                  <div style={{ display: "flex", gap: "10px" }}>
-                    <select value={quizChapter12} onChange={(e) => setQuizChapter12(e.target.value)} style={{ flex: 2, padding: "10px", borderRadius: "10px", border: "1px solid #bdc3c7", outline: "none", fontSize: "13px", color: "#2c3e50", fontWeight: "bold" }}>
+                  <div style={{ display: "flex", gap: "10px", width: "100%" }}>
+                    <select value={quizChapter12} onChange={(e) => setQuizChapter12(e.target.value)} style={{ flex: 1, minWidth: 0, padding: "10px", borderRadius: "10px", border: "1px solid #bdc3c7", outline: "none", fontSize: "13px", color: "#2c3e50", fontWeight: "bold", textOverflow: "ellipsis" }}>
                       {chapters12.map((ch) => <option key={ch} value={ch}>{ch === "Tất cả" ? "🌟 Tất cả Lớp 12" : ch}</option>)}
                     </select>
-                    <button onClick={() => startQuiz("12")} style={{ flex: 1, padding: "10px", backgroundColor: "#e74c3c", color: "#fff", border: "none", borderRadius: "10px", fontWeight: "bold", cursor: "pointer" }}>BẮT ĐẦU</button>
+                    <button onClick={() => startQuiz("12")} style={{ flexShrink: 0, padding: "10px 15px", backgroundColor: "#e74c3c", color: "#fff", border: "none", borderRadius: "10px", fontWeight: "bold", cursor: "pointer", whiteSpace: "nowrap" }}>BẮT ĐẦU</button>
                   </div>
                 </div>
 
