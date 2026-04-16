@@ -101,17 +101,17 @@ function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
 
   // STATE: KIỂM TRA (QUIZ)
-  const [quizStatus, setQuizStatus] = useState<"idle" | "playing" | "finished">(
-    "idle"
-  );
+  const [quizStatus, setQuizStatus] = useState<"idle" | "playing" | "finished">("idle");
   const [quizQuestions, setQuizQuestions] = useState<any[]>([]);
   const [currentQIndex, setCurrentQIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [currentQuizScope, setCurrentQuizScope] = useState<
-    "11" | "12" | "all" | null
-  >(null);
+  const [currentQuizScope, setCurrentQuizScope] = useState<"11" | "12" | "all" | null>(null);
+  
+  // STATE MỚI: Tùy chọn chủ đề cho bài thi Lớp 11 và Lớp 12
+  const [quizChapter11, setQuizChapter11] = useState("Tất cả");
+  const [quizChapter12, setQuizChapter12] = useState("Tất cả");
 
   // Gamification & Bảng Xếp Hạng
   const [timeLeft, setTimeLeft] = useState(60);
@@ -122,10 +122,12 @@ function HomePage() {
   const [isScoreSaved, setIsScoreSaved] = useState(false);
 
   const fullData = activeGrade === "12" ? grade12Data : grade11Data;
-  const chapters = [
-    "Tất cả",
-    ...Array.from(new Set(fullData.map((item) => item.chapter))),
-  ];
+  const chapters = ["Tất cả", ...Array.from(new Set(fullData.map((item) => item.chapter)))];
+  
+  // Lấy danh sách chủ đề riêng cho Quiz
+  const chapters11 = ["Tất cả", ...Array.from(new Set(grade11Data.map((item) => item.chapter)))];
+  const chapters12 = ["Tất cả", ...Array.from(new Set(grade12Data.map((item) => item.chapter)))];
+
   const allCompounds = [...grade11Data, ...grade12Data];
 
   useEffect(() => {
@@ -196,12 +198,20 @@ function HomePage() {
     setCurrentQuizScope(scope);
 
     let dataToQuiz: any[] = [];
-    if (scope === "11") dataToQuiz = [...grade11Data];
-    else if (scope === "12") dataToQuiz = [...grade12Data];
-    else if (scope === "all") dataToQuiz = [...grade11Data, ...grade12Data];
+    if (scope === "11") {
+      dataToQuiz = quizChapter11 === "Tất cả" 
+        ? [...grade11Data] 
+        : grade11Data.filter(item => item.chapter === quizChapter11);
+    } else if (scope === "12") {
+      dataToQuiz = quizChapter12 === "Tất cả" 
+        ? [...grade12Data] 
+        : grade12Data.filter(item => item.chapter === quizChapter12);
+    } else if (scope === "all") {
+      dataToQuiz = [...grade11Data, ...grade12Data];
+    }
 
     if (dataToQuiz.length < 4) {
-      alert("Chủ đề này cần ít nhất 4 chất!");
+      alert("Chủ đề này cần ít nhất 4 chất để tạo câu hỏi trắc nghiệm! Cô/Các em vui lòng chọn chủ đề khác nhé.");
       return;
     }
 
@@ -393,7 +403,6 @@ function HomePage() {
         paddingBottom: "40px",
       }}
     >
-      {/* KHUNG TIÊU ĐỀ & LOGO ĐÃ ĐƯỢC CHỈNH SỬA Ở ĐÂY */}
       <div
         style={{
           display: "flex",
@@ -580,7 +589,6 @@ function HomePage() {
                 />
               </div>
 
-              {/* ĐÃ KHÔI PHỤC LẠI NÚT 3D Ở ĐÂY */}
               <Link
                 to={`/compound/${learningQueue[0].id}`}
                 style={{
@@ -728,78 +736,127 @@ function HomePage() {
                   gap: "15px",
                 }}
               >
-                <button
-                  onClick={() => startQuiz("11")}
+                {/* --- KHUNG THỬ THÁCH LỚP 11 --- */}
+                <div
                   style={{
                     padding: "20px",
                     backgroundColor: "#e8f4f8",
                     border: "2px solid #3498db",
                     borderRadius: "15px",
-                    cursor: "pointer",
                     textAlign: "left",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "15px",
                   }}
                 >
-                  <span style={{ fontSize: "30px" }}>📘</span>
-                  <div>
-                    <div
-                      style={{
-                        color: "#2980b9",
-                        fontWeight: "bold",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Thử thách Lớp 11
-                    </div>
-                    <div
-                      style={{
-                        color: "#7f8c8d",
-                        fontSize: "12px",
-                        marginTop: "5px",
-                      }}
-                    >
-                      Khởi động phản xạ với Hydrocarbon, Phenol...
+                  <div style={{ display: "flex", alignItems: "center", gap: "15px", marginBottom: "15px" }}>
+                    <span style={{ fontSize: "30px" }}>📘</span>
+                    <div>
+                      <div style={{ color: "#2980b9", fontWeight: "bold", fontSize: "16px" }}>
+                        Thử thách Lớp 11
+                      </div>
+                      <div style={{ color: "#7f8c8d", fontSize: "12px", marginTop: "5px" }}>
+                        Tùy chọn chủ đề để luyện tập chuyên sâu
+                      </div>
                     </div>
                   </div>
-                </button>
-                <button
-                  onClick={() => startQuiz("12")}
+                  <div style={{ display: "flex", gap: "10px" }}>
+                    <select
+                      value={quizChapter11}
+                      onChange={(e) => setQuizChapter11(e.target.value)}
+                      style={{
+                        flex: 2,
+                        padding: "10px",
+                        borderRadius: "10px",
+                        border: "1px solid #bdc3c7",
+                        outline: "none",
+                        fontSize: "13px",
+                        color: "#2c3e50",
+                        fontWeight: "bold"
+                      }}
+                    >
+                      {chapters11.map((ch) => (
+                        <option key={ch} value={ch}>
+                          {ch === "Tất cả" ? "🌟 Tất cả Lớp 11" : ch}
+                        </option>
+                      ))}
+                    </select>
+                    <button
+                      onClick={() => startQuiz("11")}
+                      style={{
+                        flex: 1,
+                        padding: "10px",
+                        backgroundColor: "#3498db",
+                        color: "#fff",
+                        border: "none",
+                        borderRadius: "10px",
+                        fontWeight: "bold",
+                        cursor: "pointer",
+                      }}
+                    >
+                      BẮT ĐẦU
+                    </button>
+                  </div>
+                </div>
+
+                {/* --- KHUNG THỬ THÁCH LỚP 12 --- */}
+                <div
                   style={{
                     padding: "20px",
                     backgroundColor: "#fdedec",
                     border: "2px solid #e74c3c",
                     borderRadius: "15px",
-                    cursor: "pointer",
                     textAlign: "left",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "15px",
                   }}
                 >
-                  <span style={{ fontSize: "30px" }}>📕</span>
-                  <div>
-                    <div
-                      style={{
-                        color: "#c0392b",
-                        fontWeight: "bold",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Thử thách Lớp 12
-                    </div>
-                    <div
-                      style={{
-                        color: "#7f8c8d",
-                        fontSize: "12px",
-                        marginTop: "5px",
-                      }}
-                    >
-                      Gay cấn! Với Ester, Carbohydrate, Polymer...
+                  <div style={{ display: "flex", alignItems: "center", gap: "15px", marginBottom: "15px" }}>
+                    <span style={{ fontSize: "30px" }}>📕</span>
+                    <div>
+                      <div style={{ color: "#c0392b", fontWeight: "bold", fontSize: "16px" }}>
+                        Thử thách Lớp 12
+                      </div>
+                      <div style={{ color: "#7f8c8d", fontSize: "12px", marginTop: "5px" }}>
+                        Thiết lập giới hạn kiến thức bạn muốn thử
+                      </div>
                     </div>
                   </div>
-                </button>
+                  <div style={{ display: "flex", gap: "10px" }}>
+                    <select
+                      value={quizChapter12}
+                      onChange={(e) => setQuizChapter12(e.target.value)}
+                      style={{
+                        flex: 2,
+                        padding: "10px",
+                        borderRadius: "10px",
+                        border: "1px solid #bdc3c7",
+                        outline: "none",
+                        fontSize: "13px",
+                        color: "#2c3e50",
+                        fontWeight: "bold"
+                      }}
+                    >
+                      {chapters12.map((ch) => (
+                        <option key={ch} value={ch}>
+                          {ch === "Tất cả" ? "🌟 Tất cả Lớp 12" : ch}
+                        </option>
+                      ))}
+                    </select>
+                    <button
+                      onClick={() => startQuiz("12")}
+                      style={{
+                        flex: 1,
+                        padding: "10px",
+                        backgroundColor: "#e74c3c",
+                        color: "#fff",
+                        border: "none",
+                        borderRadius: "10px",
+                        fontWeight: "bold",
+                        cursor: "pointer",
+                      }}
+                    >
+                      BẮT ĐẦU
+                    </button>
+                  </div>
+                </div>
+
+                {/* --- NÚT TỔNG HỢP --- */}
                 <button
                   onClick={() => startQuiz("all")}
                   style={{
@@ -812,6 +869,7 @@ function HomePage() {
                     display: "flex",
                     alignItems: "center",
                     gap: "15px",
+                    width: "100%"
                   }}
                 >
                   <span style={{ fontSize: "30px" }}>📚</span>
@@ -832,7 +890,7 @@ function HomePage() {
                         marginTop: "5px",
                       }}
                     >
-                      Rất khó! Tổng hợp toàn bộ danh pháp.
+                      Mở khóa toàn bộ dữ liệu, giới hạn 60 giây!
                     </div>
                   </div>
                 </button>
