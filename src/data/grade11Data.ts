@@ -361,7 +361,7 @@ export const grade11Data = [
   {
     id: "but-1-yne",
     formula: "CH≡C-CH2-CH3",
-    nameIUPAC: "",
+    nameIUPAC: "But-1-yne",
     type: "Alkyne",
     commonName: "",
     chapter: "Chủ đề 1: Hydrocarbon",
@@ -373,7 +373,7 @@ export const grade11Data = [
     formula: "CH3-C≡C-CH3",
     nameIUPAC: "",
     type: "Alkyne",
-    commonName: "",
+    commonName: "But-2-yne",
     chapter: "Chủ đề 1: Hydrocarbon",
     cid: 6326,
     image2D: "",
