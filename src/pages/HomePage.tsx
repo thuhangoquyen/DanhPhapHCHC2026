@@ -11,6 +11,12 @@ interface LeaderboardEntry {
   date: string;
 }
 
+// HÀM LẤY TÊN AN TOÀN: Chống lỗi khi data bị thiếu nameIUPAC
+const getCompoundName = (compound: any) => {
+  if (!compound) return "";
+  return compound.nameIUPAC || compound.name || compound.commonName || "⚠️ Thiếu dữ liệu tên";
+};
+
 // Hàm hỗ trợ render công thức hoá học chỉ số dưới
 const formatChemicalFormula = (formula: string) => {
   if (!formula) return "";
@@ -233,10 +239,10 @@ function HomePage() {
     setActionCount(0);
   };
 
-  // --- HÀM KHỞI TẠO ĐUỔI HÌNH BẮT CHỮ ---
   const setupScrambleQuestion = (compound: any) => {
       setScrambleTarget(compound);
-      const name = compound.nameIUPAC.toUpperCase();
+      const safeName = getCompoundName(compound);
+      const name = safeName.toUpperCase();
       
       const slots = name.split('').map((char: string, index: number) => {
           const isSymbol = char === '-' || char === ',' || char === ' ' || !/[A-Z0-9]/.test(char);
@@ -252,7 +258,6 @@ function HomePage() {
 
       const chars = name.split('').filter((c: string) => /[A-Z0-9]/.test(c));
       const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      // Thêm 3 ký tự gây nhiễu
       for(let i=0; i<3; i++) {
           chars.push(alphabet[Math.floor(Math.random() * alphabet.length)]);
       }
@@ -262,12 +267,17 @@ function HomePage() {
           char: c,
           used: false
       }));
-      letters.sort(() => Math.random() - 0.5); // Xáo trộn
+      letters.sort(() => Math.random() - 0.5);
       setScrambleLetters(letters);
       setIsScrambleWrong(false);
   };
 
   const startQuiz = (scope: "11" | "12" | "all") => {
+    if (!playerName.trim()) {
+      alert("⚠️ Các em vui lòng nhập Họ tên và Lớp trước khi bắt đầu thi nhé!");
+      return;
+    }
+
     setCurrentQuizScope(scope);
 
     let dataToQuiz: any[] = [];
@@ -303,7 +313,6 @@ function HomePage() {
       setSelectedAnswer(null);
       setQuizStatus("playing_time");
     } else {
-      // Setup Scramble
       const shuffledData = [...dataToQuiz].sort(() => 0.5 - Math.random()).slice(0, 10);
       setScrambleQuestions(shuffledData);
       setScrambleQIndex(0);
@@ -385,9 +394,10 @@ function HomePage() {
 
   const searchResults = allCompounds.filter((compound) => {
     const query = searchQuery.toLowerCase();
+    const safeName = getCompoundName(compound).toLowerCase();
     return (
-      compound.nameIUPAC.toLowerCase().includes(query) ||
-      compound.formula.toLowerCase().includes(query) ||
+      safeName.includes(query) ||
+      (compound.formula && compound.formula.toLowerCase().includes(query)) ||
       (compound.commonName && compound.commonName.toLowerCase().includes(query))
     );
   });
@@ -424,9 +434,10 @@ function HomePage() {
 
   return (
     <div style={{ padding: "15px", fontFamily: "'Inter', Arial, sans-serif", maxWidth: "500px", margin: "0 auto", backgroundColor: "#fdfdfd", minHeight: "100vh", paddingBottom: "40px" }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginBottom: "15px" }}>
-        <img src="/logo-co-ha.png" alt="Logo Cô Hà" style={{ width: "45px", height: "45px", objectFit: "contain", borderRadius: "50%", boxShadow: "0 2px 5px rgba(0,0,0,0.1)" }} />
-        <h2 style={{ color: "#2c3e50", fontSize: "20px", margin: 0 }}>DANH PHÁP HỢP CHẤT HỮU CƠ</h2>
+      
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "15px" }}>
+        <img src="/logo-co-ha.png" alt="Logo Cô Hà" style={{ width: "40px", height: "40px", objectFit: "contain", borderRadius: "50%", boxShadow: "0 2px 5px rgba(0,0,0,0.1)" }} />
+        <h2 style={{ color: "#2c3e50", fontSize: "18px", margin: 0, lineHeight: "1.2", textAlign: "left" }}>DANH PHÁP HỢP CHẤT HỮU CƠ</h2>
       </div>
 
       {renderTabs()}
@@ -434,7 +445,7 @@ function HomePage() {
       {/* -------------------- TAB HỌC TẬP -------------------- */}
       {activeTab === "learning" && (
         <div style={{ animation: "fadeIn 0.3s" }}>
-          {/* Menu Học Tập giữ nguyên như cũ */}
+          {/* Menu Học Tập */}
           <div style={{ display: "flex", gap: "10px", marginBottom: "15px" }}>
             <button onClick={() => setActiveGrade("11")} style={{ flex: 1, padding: "12px", borderRadius: "10px", border: "none", backgroundColor: activeGrade === "11" ? "#3498db" : "#f1f2f6", color: activeGrade === "11" ? "white" : "#7f8c8d", fontWeight: "bold", cursor: "pointer" }}>Lớp 11</button>
             <button onClick={() => setActiveGrade("12")} style={{ flex: 1, padding: "12px", borderRadius: "10px", border: "none", backgroundColor: activeGrade === "12" ? "#e74c3c" : "#f1f2f6", color: activeGrade === "12" ? "white" : "#7f8c8d", fontWeight: "bold", cursor: "pointer" }}>Lớp 12</button>
@@ -474,23 +485,22 @@ function HomePage() {
       {activeTab === "quiz" && (
         <div style={{ animation: "fadeIn 0.3s" }}>
           
-          {/* MENU CHỌN GAME */}
           {quizStatus === "idle" && (
             <div>
-              {/* CHỌN CHẾ ĐỘ CHƠI */}
+              <div style={{ marginBottom: "20px", padding: "15px", backgroundColor: "#f0f7ff", borderRadius: "15px", border: "2px dashed #3498db" }}>
+                <p style={{ margin: "0 0 10px 0", fontWeight: "bold", color: "#2980b9", fontSize: "14px" }}>✍️ Nhập Họ Tên & Lớp trước khi thi:</p>
+                <input 
+                  type="text" 
+                  placeholder="Ví dụ: Nguyễn Văn A - 11A1" 
+                  value={playerName} 
+                  onChange={(e) => setPlayerName(e.target.value)} 
+                  style={{ width: "100%", padding: "12px", borderRadius: "10px", border: "1px solid #bdc3c7", fontSize: "14px", outline: "none", boxSizing: "border-box" }} 
+                />
+              </div>
+
               <div style={{ display: "flex", backgroundColor: "#ecf0f1", borderRadius: "15px", padding: "5px", marginBottom: "25px" }}>
-                <button
-                  onClick={() => setGameType("time")}
-                  style={{ flex: 1, padding: "12px", borderRadius: "12px", border: "none", backgroundColor: gameType === "time" ? "#fff" : "transparent", color: gameType === "time" ? "#e74c3c" : "#7f8c8d", fontWeight: "900", fontSize: "13px", boxShadow: gameType === "time" ? "0 4px 10px rgba(0,0,0,0.1)" : "none", cursor: "pointer", transition: "0.2s" }}
-                >
-                  ⏱️ ĐẤU TRƯỜNG 60S
-                </button>
-                <button
-                  onClick={() => setGameType("scramble")}
-                  style={{ flex: 1, padding: "12px", borderRadius: "12px", border: "none", backgroundColor: gameType === "scramble" ? "#fff" : "transparent", color: gameType === "scramble" ? "#8e44ad" : "#7f8c8d", fontWeight: "900", fontSize: "13px", boxShadow: gameType === "scramble" ? "0 4px 10px rgba(0,0,0,0.1)" : "none", cursor: "pointer", transition: "0.2s" }}
-                >
-                  🧩 ĐUỔI HÌNH BẮT CHỮ
-                </button>
+                <button onClick={() => setGameType("time")} style={{ flex: 1, padding: "12px", borderRadius: "12px", border: "none", backgroundColor: gameType === "time" ? "#fff" : "transparent", color: gameType === "time" ? "#e74c3c" : "#7f8c8d", fontWeight: "900", fontSize: "13px", boxShadow: gameType === "time" ? "0 4px 10px rgba(0,0,0,0.1)" : "none", cursor: "pointer", transition: "0.2s" }}>⏱️ ĐẤU TRƯỜNG 60S</button>
+                <button onClick={() => setGameType("scramble")} style={{ flex: 1, padding: "12px", borderRadius: "12px", border: "none", backgroundColor: gameType === "scramble" ? "#fff" : "transparent", color: gameType === "scramble" ? "#8e44ad" : "#7f8c8d", fontWeight: "900", fontSize: "13px", boxShadow: gameType === "scramble" ? "0 4px 10px rgba(0,0,0,0.1)" : "none", cursor: "pointer", transition: "0.2s" }}>🧩 ĐUỔI HÌNH BẮT CHỮ</button>
               </div>
 
               <div style={{ textAlign: "center", marginBottom: "20px" }}>
@@ -503,7 +513,6 @@ function HomePage() {
               </div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-                {/* --- KHUNG THỬ THÁCH LỚP 11 --- */}
                 <div style={{ padding: "20px", backgroundColor: "#e8f4f8", border: "2px solid #3498db", borderRadius: "15px", textAlign: "left" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "15px", marginBottom: "15px" }}>
                     <span style={{ fontSize: "30px" }}>📘</span>
@@ -520,7 +529,6 @@ function HomePage() {
                   </div>
                 </div>
 
-                {/* --- KHUNG THỬ THÁCH LỚP 12 --- */}
                 <div style={{ padding: "20px", backgroundColor: "#fdedec", border: "2px solid #e74c3c", borderRadius: "15px", textAlign: "left" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "15px", marginBottom: "15px" }}>
                     <span style={{ fontSize: "30px" }}>📕</span>
@@ -537,7 +545,6 @@ function HomePage() {
                   </div>
                 </div>
 
-                {/* --- NÚT TỔNG HỢP --- */}
                 <button onClick={() => startQuiz("all")} style={{ padding: "20px", backgroundColor: "#eefaf1", border: "2px solid #2ecc71", borderRadius: "15px", cursor: "pointer", textAlign: "left", display: "flex", alignItems: "center", gap: "15px", width: "100%" }}>
                   <span style={{ fontSize: "30px" }}>📚</span>
                   <div>
@@ -547,7 +554,6 @@ function HomePage() {
                 </button>
               </div>
 
-              {/* Leaderboard giữ nguyên */}
               {leaderboard.length > 0 && (
                 <div style={{ marginTop: "30px", padding: "20px", backgroundColor: "#fff", borderRadius: "20px", border: "2px solid #f1c40f", boxShadow: "0 8px 20px rgba(241, 196, 15, 0.15)" }}>
                   <h3 style={{ color: "#d35400", textAlign: "center", marginTop: 0, fontSize: "18px" }}>🏆 BẢNG VÀNG TOP 10 🏆</h3>
@@ -576,7 +582,6 @@ function HomePage() {
             </div>
           )}
 
-          {/* GIAO DIỆN CHƠI: ĐẤU TRƯỜNG 60S */}
           {quizStatus === "playing_time" && quizQuestions.length > 0 && (
             <div style={{ backgroundColor: "#fff", padding: "20px", borderRadius: "20px", boxShadow: "0 4px 15px rgba(0,0,0,0.05)" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "15px" }}>
@@ -595,7 +600,7 @@ function HomePage() {
                   {quizQuestions[currentQIndex].questionType === "name2formula" ? "Công thức của chất này là gì?" : "Tên gọi của chất này là gì?"}
                 </p>
                 {quizQuestions[currentQIndex].questionType === "name2formula" ? (
-                  <h3 style={{ fontSize: "22px", color: "#2c3e50", margin: 0 }}>{quizQuestions[currentQIndex].correctItem.nameIUPAC}</h3>
+                  <h3 style={{ fontSize: "22px", color: "#2c3e50", margin: 0 }}>{getCompoundName(quizQuestions[currentQIndex].correctItem)}</h3>
                 ) : (
                   <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "80px" }}>
                     <FormulaDisplay compound={quizQuestions[currentQIndex].correctItem} isOption={false} />
@@ -616,7 +621,7 @@ function HomePage() {
                     <button key={index} onClick={() => handleTimeAttackAnswer(opt.id)} disabled={!!selectedAnswer} style={{ display: "flex", alignItems: "center", width: "100%", padding: "15px", borderRadius: "12px", border: `2px solid ${borderColor}`, backgroundColor: bgColor, color: textColor, cursor: selectedAnswer ? "default" : "pointer", transition: "0.2s", textAlign: "left" }}>
                       <span style={{ backgroundColor: selectedAnswer ? isCorrectAnswer ? "#2ecc71" : isSelected ? "#e74c3c" : "#bdc3c7" : "#bdc3c7", color: "#fff", minWidth: "28px", height: "28px", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%", fontWeight: "bold", marginRight: "15px", fontSize: "13px" }}>{["A", "B", "C", "D"][index]}</span>
                       <span style={{ fontSize: "16px", fontWeight: "bold", display: "flex", alignItems: "center" }}>
-                        {quizQuestions[currentQIndex].questionType === "name2formula" ? <FormulaDisplay compound={opt} isOption={true} /> : opt.nameIUPAC}
+                        {quizQuestions[currentQIndex].questionType === "name2formula" ? <FormulaDisplay compound={opt} isOption={true} /> : getCompoundName(opt)}
                       </span>
                     </button>
                   );
@@ -625,10 +630,8 @@ function HomePage() {
             </div>
           )}
 
-          {/* GIAO DIỆN CHƠI: ĐUỔI HÌNH BẮT CHỮ */}
           {quizStatus === "playing_scramble" && scrambleTarget && (
             <div style={{ backgroundColor: "#fff", padding: "20px", borderRadius: "20px", boxShadow: "0 4px 15px rgba(0,0,0,0.05)" }}>
-              {/* Header: Lives and Score */}
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "15px", alignItems: "center" }}>
                   <div style={{ color: "#e74c3c", fontSize: "20px", fontWeight: "bold" }}>
                       {"❤️".repeat(scrambleLives)}{"🖤".repeat(3 - scrambleLives)}
@@ -638,7 +641,6 @@ function HomePage() {
                   </div>
               </div>
 
-              {/* Target Image/Formula */}
               <div style={{ textAlign: "center", marginBottom: "25px", padding: "20px", backgroundColor: "#f8f9fa", borderRadius: "15px", border: "1px solid #e9ecef" }}>
                   <p style={{ color: "#7f8c8d", fontSize: "13px", textTransform: "uppercase", fontWeight: "bold", marginBottom: "10px" }}>Tên gọi IUPAC của chất này là gì?</p>
                   <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "80px" }}>
@@ -646,7 +648,6 @@ function HomePage() {
                   </div>
               </div>
 
-              {/* Khu vực khe trống (Slots) */}
               <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "4px", marginBottom: "30px", animation: isScrambleWrong ? "shake 0.5s" : "none" }}>
                   {scrambleSlots.map((slot, idx) => (
                       <div key={idx}
@@ -671,7 +672,6 @@ function HomePage() {
                   ))}
               </div>
 
-              {/* Bàn phím chữ cái lộn xộn */}
               <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "8px" }}>
                   {scrambleLetters.map(letter => (
                       <button key={letter.id}
@@ -698,7 +698,6 @@ function HomePage() {
             </div>
           )}
 
-          {/* MÀN HÌNH KẾT QUẢ CHUNG */}
           {quizStatus === "finished" && (
             <div style={{ textAlign: "center", padding: "30px 20px", backgroundColor: "#fff", borderRadius: "20px", border: "3px solid #f1c40f", boxShadow: "0 10px 25px rgba(241, 196, 15, 0.2)" }}>
               <div style={{ fontSize: "60px", marginBottom: "10px" }}>{getRanking().icon}</div>
@@ -718,16 +717,17 @@ function HomePage() {
                 </div>
               </div>
 
-              {score > 0 && !isScoreSaved ? (
+              {score > 0 && (
                 <div style={{ backgroundColor: "#fff9e6", padding: "15px", borderRadius: "15px", marginBottom: "25px", border: "1px dashed #f1c40f" }}>
-                  <p style={{ margin: "0 0 10px 0", fontSize: "14px", fontWeight: "bold", color: "#d35400" }}>🏆 Ghi danh vào Bảng Vàng</p>
-                  <div style={{ display: "flex", gap: "8px" }}>
-                    <input type="text" placeholder="Nhập tên của bạn..." value={playerName} onChange={(e) => setPlayerName(e.target.value)} style={{ flex: 1, padding: "12px", borderRadius: "10px", border: "1px solid #bdc3c7", fontSize: "14px", outline: "none" }} />
-                    <button onClick={handleSaveToLeaderboard} disabled={!playerName.trim()} style={{ padding: "0 20px", backgroundColor: playerName.trim() ? "#f1c40f" : "#bdc3c7", color: "#fff", border: "none", borderRadius: "10px", fontWeight: "bold", cursor: playerName.trim() ? "pointer" : "not-allowed" }}>LƯU</button>
-                  </div>
+                  {isScoreSaved ? (
+                     <div style={{ color: "#2ecc71", fontWeight: "bold", fontSize: "15px", animation: "pulse 1s infinite alternate" }}>✅ Đã lưu kỷ lục của bạn vào Bảng vàng!</div>
+                  ) : (
+                     <>
+                        <p style={{ margin: "0 0 10px 0", fontSize: "14px", fontWeight: "bold", color: "#d35400" }}>🏆 Chúc mừng bạn: {playerName}</p>
+                        <button onClick={handleSaveToLeaderboard} style={{ width: "100%", padding: "12px", backgroundColor: "#f1c40f", color: "#fff", border: "none", borderRadius: "10px", fontWeight: "bold", cursor: "pointer", fontSize: "15px" }}>LƯU KẾT QUẢ VÀO BẢNG VÀNG</button>
+                     </>
+                  )}
                 </div>
-              ) : (
-                isScoreSaved && <div style={{ color: "#2ecc71", fontWeight: "bold", fontSize: "15px", marginBottom: "20px", animation: "pulse 1s infinite alternate" }}>✅ Đã lưu kỷ lục của bạn vào Bảng vàng!</div>
               )}
 
               <div style={{ display: "flex", gap: "10px" }}>
@@ -739,7 +739,7 @@ function HomePage() {
         </div>
       )}
 
-      {/* -------------------- TAB TRA CỨU & HƯỚNG DẪN BÊN DƯỚI GIỮ NGUYÊN -------------------- */}
+      {/* -------------------- TAB TRA CỨU -------------------- */}
       {activeTab === "search" && (
         <div style={{ animation: "fadeIn 0.3s" }}>
           <div style={{ position: "relative", marginBottom: "25px" }}>
@@ -766,60 +766,476 @@ function HomePage() {
         </div>
       )}
 
+      {/* -------------------- TAB HƯỚNG DẪN -------------------- */}
       {activeTab === "guide" && (
         <div style={{ animation: "fadeIn 0.3s", paddingBottom: "20px" }}>
           <div style={{ textAlign: "center", marginBottom: "25px" }}>
-            <h3 style={{ color: "#2c3e50", margin: "0 0 5px 0", fontSize: "22px" }}>📖 SỔ TAY DANH PHÁP</h3>
-            <p style={{ color: "#7f8c8d", fontSize: "13px", margin: 0 }}>Chuẩn IUPAC</p>
+            <h3
+              style={{
+                color: "#2c3e50",
+                margin: "0 0 5px 0",
+                fontSize: "22px",
+              }}
+            >
+              📖 SỔ TAY DANH PHÁP
+            </h3>
+            <p style={{ color: "#7f8c8d", fontSize: "13px", margin: 0 }}>
+              Chuẩn IUPAC
+            </p>
           </div>
-          {/* Nội dung sổ tay được giữ nguyên */}
-          <div style={{ backgroundColor: "#fff", borderRadius: "15px", padding: "20px", marginBottom: "20px", boxShadow: "0 4px 10px rgba(0,0,0,0.05)" }}>
-            <div style={{ backgroundColor: "#3498db", color: "#fff", display: "inline-block", padding: "5px 15px", borderRadius: "20px", fontSize: "12px", fontWeight: "bold", marginBottom: "15px", textTransform: "uppercase" }}>I. Nguyên tắc chung</div>
-            <p style={{ fontSize: "14px", color: "#2c3e50", lineHeight: "1.6", marginBottom: "15px" }}>Danh pháp thay thế (IUPAC) của hợp chất hữu cơ thường gồm 3 phần:</p>
-            <div style={{ display: "flex", gap: "5px", flexWrap: "wrap", justifyContent: "center", alignItems: "center" }}>
-              <div style={{ backgroundColor: "#e8f4f8", border: "1px solid #3498db", color: "#2980b9", padding: "10px", borderRadius: "10px", fontSize: "13px", fontWeight: "bold", flex: 1, textAlign: "center" }}>Vị trí + Tên nhánh</div>
+          <div
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: "15px",
+              padding: "20px",
+              marginBottom: "20px",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "#3498db",
+                color: "#fff",
+                display: "inline-block",
+                padding: "5px 15px",
+                borderRadius: "20px",
+                fontSize: "12px",
+                fontWeight: "bold",
+                marginBottom: "15px",
+                textTransform: "uppercase",
+              }}
+            >
+              I. Nguyên tắc chung
+            </div>
+            <p
+              style={{
+                fontSize: "14px",
+                color: "#2c3e50",
+                lineHeight: "1.6",
+                marginBottom: "15px",
+              }}
+            >
+              Danh pháp thay thế (IUPAC) của hợp chất hữu cơ thường gồm 3 phần:
+            </p>
+            <div
+              style={{
+                display: "flex",
+                gap: "5px",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <div
+                style={{
+                  backgroundColor: "#e8f4f8",
+                  border: "1px solid #3498db",
+                  color: "#2980b9",
+                  padding: "10px",
+                  borderRadius: "10px",
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  flex: 1,
+                  textAlign: "center",
+                }}
+              >
+                Vị trí + Tên nhánh <br />{" "}
+                <span style={{ fontSize: "10px", fontWeight: "normal" }}></span>
+              </div>
               <span style={{ fontSize: "20px", color: "#bdc3c7" }}>+</span>
-              <div style={{ backgroundColor: "#eefaf1", border: "1px solid #2ecc71", color: "#27ae60", padding: "10px", borderRadius: "10px", fontSize: "13px", fontWeight: "bold", flex: 1, textAlign: "center" }}>Tiền tố</div>
+              <div
+                style={{
+                  backgroundColor: "#eefaf1",
+                  border: "1px solid #2ecc71",
+                  color: "#27ae60",
+                  padding: "10px",
+                  borderRadius: "10px",
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  flex: 1,
+                  textAlign: "center",
+                }}
+              >
+                Tiền tố <br />{" "}
+                <span style={{ fontSize: "10px", fontWeight: "normal" }}>
+                  (Số nguyên tử carbon mạch chính: Meth, Eth, Prop...)
+                </span>
+              </div>
               <span style={{ fontSize: "20px", color: "#bdc3c7" }}>+</span>
-              <div style={{ backgroundColor: "#fdedec", border: "1px solid #e74c3c", color: "#c0392b", padding: "10px", borderRadius: "10px", fontSize: "13px", fontWeight: "bold", flex: 1, textAlign: "center" }}>Hậu tố</div>
+              <div
+                style={{
+                  backgroundColor: "#fdedec",
+                  border: "1px solid #e74c3c",
+                  color: "#c0392b",
+                  padding: "10px",
+                  borderRadius: "10px",
+                  fontSize: "13px",
+                  fontWeight: "bold",
+                  flex: 1,
+                  textAlign: "center",
+                }}
+              >
+                Hậu tố <br />{" "}
+                <span style={{ fontSize: "10px", fontWeight: "normal" }}>
+                  (ane, ene, ol, al...)
+                </span>
+              </div>
             </div>
           </div>
-          
-          <div style={{ backgroundColor: "#fff", borderRadius: "15px", padding: "20px", marginBottom: "20px", boxShadow: "0 4px 10px rgba(0,0,0,0.05)" }}>
-            <div style={{ backgroundColor: "#e67e22", color: "#fff", display: "inline-block", padding: "5px 15px", borderRadius: "20px", fontSize: "12px", fontWeight: "bold", marginBottom: "15px", textTransform: "uppercase" }}>II. Hoá Học 11</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-              <div style={{ borderLeft: "4px solid #f39c12", paddingLeft: "10px" }}>
-                <strong style={{ color: "#d35400", fontSize: "15px" }}>1. HIDROCARBON</strong>
-                <p style={{ margin: "5px 0", fontSize: "13px", color: "#34495e" }}>• <b>Alkane:</b> Vị trí nhánh - Tên nhánh + Tên tiền tố (mạch chính) + <span style={{ color: "#e74c3c", fontWeight: "bold" }}>ane</span></p>
+          <p
+            style={{
+              fontSize: "14px",
+              color: "#2c3e50",
+              lineHeight: "1.6",
+              marginBottom: "15px",
+            }}
+          >
+            Quy tắc về số và chữ: Giữa số và số dùng dấu phẩy (,), giữa số và
+            chữ dùng dấu gạch nối (-).
+          </p>
+          <span style={{ fontSize: "10px", fontWeight: "normal" }}></span>
+          <div
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: "15px",
+              padding: "20px",
+              marginBottom: "20px",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "#e67e22",
+                color: "#fff",
+                display: "inline-block",
+                padding: "5px 15px",
+                borderRadius: "20px",
+                fontSize: "12px",
+                fontWeight: "bold",
+                marginBottom: "15px",
+                textTransform: "uppercase",
+              }}
+            >
+              II. Hoá Học 11
+            </div>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+            >
+              <div
+                style={{ borderLeft: "4px solid #f39c12", paddingLeft: "10px" }}
+              >
+                <strong style={{ color: "#d35400", fontSize: "15px" }}>
+                  1. HIDROCARBON
+                </strong>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontSize: "13px",
+                    color: "#34495e",
+                  }}
+                >
+                  • <b>Alkane:</b> Vị trí nhánh - Tên nhánh + Tên tiền tố (mạch
+                  chính) +{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    ane
+                  </span>
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Mạch chính là mạch C dài nhất và có nhiều nhánh nhất.
+                    Đánh số thứ tự các nguyên tử C trên mạch chính từ đầu gần
+                    nhánh nhất. Tên nhánh gọi theo thứ tự vần chữ cái. Nếu có
+                    nhiều nhánh cùng tên thì sau tất cả các số chỉ vị trí của
+                    chúng, trước tên nhánh thêm (di, tri, tetra…) để chỉ số
+                    lượng nhánh cùng tên.
+                  </i>
+                  <br />
+                  <br />• <b>Alkene và Alkyne:</b> Vị trí nhánh - Tên nhánh +
+                  Tên tiền tố (mạch chính) - vị trí liên kết bội -{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    Tên hậu tố (ene/yne)
+                  </span>
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Chọn mạch chính chứa liên kết bội, đánh số ưu tiên
+                    đầu gần liên kết bội.
+                  </i>
+                  <br />
+                  <br />• <b>Arene:</b> Tên nhóm alkyl +{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    benzene
+                  </span>
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Khi có hai nhóm thế trên vòng benzene, vị trí của
+                    chúng có thể được chỉ ra bằng các chữ số 1,2; 1,3 hay 1,4
+                    hoặc bằng các chữ tương ứng là ortho (o), meta (m) hay para
+                    (p)
+                  </i>
+                </p>
               </div>
-              <div style={{ borderLeft: "4px solid #f39c12", paddingLeft: "10px" }}>
-                <strong style={{ color: "#d35400", fontSize: "15px" }}>2. DẪN XUẤT HALOGEN - ALCOHOL - PHENOL</strong>
-                <p style={{ margin: "5px 0", fontSize: "13px", color: "#34495e" }}>• <b>Alcohol đơn chức:</b> Tên hydrocarbon (bỏ kí tự "e" ở cuối) - Vị trí nhóm -OH - <span style={{ color: "#e74c3c", fontWeight: "bold" }}>ol</span></p>
+              <div
+                style={{ borderLeft: "4px solid #f39c12", paddingLeft: "10px" }}
+              >
+                <strong style={{ color: "#d35400", fontSize: "15px" }}>
+                  2. DẪN XUẤT HALOGEN - ALCOHOL - PHENOL
+                </strong>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontSize: "13px",
+                    color: "#34495e",
+                  }}
+                >
+                  • <b>Dẫn xuất halogen: </b> Vị trí nhóm thể - Tên nhóm thể
+                  halogen{""}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    o{" "}
+                  </span>{" "}
+                  + Tên hydrocarbon
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: nhóm thế halogeno (fluoro, chloro, bromo, iodo).
+                  </i>
+                  <br /> Tên gốc - chức: Tên gốc hydrocarbon halide
+                  <br /> (Ví dụ: ethyl chloride).
+                  <br />
+                  <br />• <b>Alcohol đơn chức:</b> Tên hydrocarbon (bỏ kí tự "e"
+                  ở cuối) - Vị trí nhóm -OH -{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    ol
+                  </span>
+                  <br />• <b>Alcohol đa chức:</b> Tên hydrocarbon - Vị trí nhóm
+                  -OH - Từ chỉ số lượng nhóm -OH (di, tri,...) +{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    ol
+                  </span>
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Mạch chính là mạch carbon có nhóm -OH và dài nhất.
+                    Đánh số thứ tự: từ đầu gần nhóm -OH nhất.
+                  </i>
+                  <br />
+                  <br />• <b>Phenol:</b> Đọc tên theo vị trí các nhóm thế trên
+                  vòng benzene đính với nhóm -OH.
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: ưu tiên đánh số 1 từ C có nhóm -OH, rồi theo chiều
+                    sao cho các nhánh khác có số nhỏ nhất.
+                  </i>
+                </p>
               </div>
-              <div style={{ borderLeft: "4px solid #f39c12", paddingLeft: "10px" }}>
-                <strong style={{ color: "#d35400", fontSize: "15px" }}>3. ALDEHYDE & CARBOXYLIC ACID</strong>
-                <p style={{ margin: "5px 0", fontSize: "13px", color: "#34495e" }}>• <b>Acid:</b> Vị trí nhánh - Tên nhánh + Tên hydrocarbon (bỏ kí tự "e" ở cuối) + <span style={{ color: "#e74c3c", fontWeight: "bold" }}>oic</span> acid</p>
+              <div
+                style={{ borderLeft: "4px solid #f39c12", paddingLeft: "10px" }}
+              >
+                <strong style={{ color: "#d35400", fontSize: "15px" }}>
+                  3. ALDEHYDE & CARBOXYLIC ACID
+                </strong>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontSize: "13px",
+                    color: "#34495e",
+                  }}
+                >
+                  • <b>Aldehyde:</b> Tên hydrocarbon (bỏ kí tự "e" ở cuối) +{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    al
+                  </span>{" "}
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Đánh số các nguyên tử C ở mạch chính bắt đầu ở nguyên
+                    tử C của nhóm -CHO.
+                  </i>
+                  <br /> Tên thông thường: thay "...ic acid" bằng "...ic
+                  aldehyde" hoặc "...aldehyde"
+                  <br />• <b>Ketone:</b> Tên hydrocarbon (bỏ kí tự "e" ở cuối) -
+                  Vị trí nhóm carbonyl -{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    one
+                  </span>{" "}
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Đánh số các nguyên tử C ở mạch chính bắt đầu từ
+                    nguyên tử C gần nhóm C=O nhất.
+                  </i>
+                  <br />
+                  <br />• <b>Acid:</b> Vị trí nhánh - Tên nhánh + Tên
+                  hydrocarbon (bỏ kí tự "e" ở cuối) +{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    oic
+                  </span>{" "}
+                  acid
+                  <br />
+                  (Ví dụ: Ethan
+                  <span style={{ color: "#e74c3c" }}>oic</span> acid)
+                </p>
               </div>
             </div>
           </div>
-          
-          <div style={{ backgroundColor: "#fff", borderRadius: "15px", padding: "20px", boxShadow: "0 4px 10px rgba(0,0,0,0.05)" }}>
-            <div style={{ backgroundColor: "#9b59b6", color: "#fff", display: "inline-block", padding: "5px 15px", borderRadius: "20px", fontSize: "12px", fontWeight: "bold", marginBottom: "15px", textTransform: "uppercase" }}>III. Hoá Học 12</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-              <div style={{ borderLeft: "4px solid #8e44ad", paddingLeft: "10px" }}>
-                <strong style={{ color: "#8e44ad", fontSize: "15px" }}>1. ESTER (R-COO-R')</strong>
-                <p style={{ margin: "5px 0", fontSize: "13px", color: "#34495e" }}><span style={{ color: "#2980b9", fontWeight: "bold" }}>Tên gốc R'</span> + <span style={{ color: "#27ae60", fontWeight: "bold" }}>Tên gốc acid RCOO</span> (đổi đuôi ic thành <span style={{ color: "#e74c3c", fontWeight: "bold" }}>ate</span>)</p>
+          <div
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: "15px",
+              padding: "20px",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "#9b59b6",
+                color: "#fff",
+                display: "inline-block",
+                padding: "5px 15px",
+                borderRadius: "20px",
+                fontSize: "12px",
+                fontWeight: "bold",
+                marginBottom: "15px",
+                textTransform: "uppercase",
+              }}
+            >
+              III. Hoá Học 12
+            </div>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+            >
+              <div
+                style={{ borderLeft: "4px solid #8e44ad", paddingLeft: "10px" }}
+              >
+                <strong style={{ color: "#8e44ad", fontSize: "15px" }}>
+                  1. ESTER (R-COO-R')
+                </strong>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontSize: "13px",
+                    color: "#34495e",
+                  }}
+                >
+                  <span style={{ color: "#2980b9", fontWeight: "bold" }}>
+                    Tên gốc R'
+                  </span>{" "}
+                  +{" "}
+                  <span style={{ color: "#27ae60", fontWeight: "bold" }}>
+                    Tên gốc acid RCOO
+                  </span>{" "}
+                  (đổi đuôi ic thành{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    ate
+                  </span>
+                  )<br />
+                  <i style={{ color: "#7f8c8d" }}>
+                    Ví dụ: <span style={{ color: "#2980b9" }}>Methyl</span>{" "}
+                    <span style={{ color: "#27ae60" }}>methano</span>
+                    <span style={{ color: "#e74c3c" }}>ate</span> (HCOOCH
+                    <sub>3</sub>)
+                  </i>
+                </p>
               </div>
-              <div style={{ borderLeft: "4px solid #8e44ad", paddingLeft: "10px" }}>
-                <strong style={{ color: "#8e44ad", fontSize: "15px" }}>2. AMINE</strong>
-                <p style={{ margin: "5px 0", fontSize: "13px", color: "#34495e" }}>Tên gốc chức: Tên gốc hydrocarbon + <span style={{ color: "#e74c3c", fontWeight: "bold" }}>amine</span></p>
+              <div
+                style={{ borderLeft: "4px solid #8e44ad", paddingLeft: "10px" }}
+              >
+                <strong style={{ color: "#8e44ad", fontSize: "15px" }}>
+                  2. AMINE
+                </strong>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontSize: "13px",
+                    color: "#34495e",
+                  }}
+                >
+                  Tên gốc chức: Tên gốc hydrocarbon +{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    amine
+                  </span>{" "}
+                  <br />
+                  <br />• <b>Amine bậc một:</b> Tên hydrocarbon (bỏ kí tự "e" ở
+                  cuối) - vị trí nhóm -NH<sub>2</sub> -{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    amine
+                  </span>{" "}
+                  <br />
+                  <br />• <b>Amine bậc hai:</b> N-tên gốc hydrocarbon + tên
+                  hydrocarbon mạch dài nhất (bỏ kí tự "e" ở cuối) - vị trí nhóm
+                  amine -{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    amine
+                  </span>{" "}
+                  <br />
+                  <br />• <b>Amine bậc ba:</b> N-tên gốc hydrocarbon thứ nhất -
+                  N-tên gốc hydrocarbon thứ hai + tên hydrocarbon mạch dài nhất
+                  (bỏ kí tự "e" ở cuối) - vị trí nhóm amine -{" "}
+                  <span style={{ color: "#e74c3c", fontWeight: "bold" }}>
+                    amine
+                  </span>
+                </p>
+              </div>
+              <div
+                style={{ borderLeft: "4px solid #8e44ad", paddingLeft: "10px" }}
+              >
+                <strong style={{ color: "#8e44ad", fontSize: "15px" }}>
+                  3. AMINO ACID
+                </strong>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontSize: "13px",
+                    color: "#34495e",
+                  }}
+                >
+                  <span style={{ color: "#2980b9", fontWeight: "bold" }}>
+                    Vị trí của nhóm amino - amino
+                  </span>{" "}
+                  +{" "}
+                  <span style={{ color: "#27ae60", fontWeight: "bold" }}>
+                    Tên của carboxylic acid tương ứng
+                  </span>
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Vị trí của nhóm amino (2, 3, 4,...) là vị trí của
+                    nguyên tử C trong mạch C của carboxylic acid liên kết trực
+                    tiếp với nhóm này, tính từ nguyên tử C của nhóm carbonyl.
+                  </i>
+                  <br /> Tên bán hệ thống: thay vị trí của các nhóm amino (2 ,3,
+                  4,...) bằng các chữ cái Hy Lạp và dùng tên thông thường của
+                  carboxylic acid.
+                </p>
+              </div>
+              <div
+                style={{ borderLeft: "4px solid #8e44ad", paddingLeft: "10px" }}
+              >
+                <strong style={{ color: "#8e44ad", fontSize: "15px" }}>
+                  4. POLYMER
+                </strong>
+                <p
+                  style={{
+                    margin: "5px 0",
+                    fontSize: "13px",
+                    color: "#34495e",
+                  }}
+                >
+                  <span style={{ color: "#2980b9", fontWeight: "bold" }}>
+                    poly
+                  </span>{" "}
+                  +{" "}
+                  <span style={{ color: "#27ae60", fontWeight: "bold" }}>
+                    tên của monomer
+                  </span>
+                  <br />
+                  <i style={{ color: "#7f8c8d", fontSize: "12px" }}>
+                    Lưu ý: Nếu tên của monomer gồm hai tử trở lên hoặc polymer
+                    được hình thành từ hai loại monomer trở lên thì tên của
+                    monomer được đặt trong dấu ngoặc đơn.
+                    <br /> (ví dụ: poly(vinyl chloride))
+                  </i>
+                </p>
               </div>
             </div>
           </div>
         </div>
       )}
       
-      {/* KHAI BÁO CSS CHO HIỆU ỨNG RUNG LẮC KHI XẾP SAI CHỮ */}
+      {/* KHỐI CSS GỘP CHUNG TẤT CẢ ANIMATION */}
       <style>{`
         @keyframes pulse {
           0% { transform: scale(1); }
